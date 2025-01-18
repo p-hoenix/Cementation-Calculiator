@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'mainwindow.h'
+** Meta object code from reading C++ file 'window2.h'
 **
 ** Created by: The Qt Meta Object Compiler version 68 (Qt 6.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../mainwindow.h"
+#include "../../../window2.h"
 #include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
@@ -17,7 +17,7 @@
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'mainwindow.h' doesn't include <QObject>."
+#error "The header file 'window2.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
 #error "This file was generated using the moc from 6.7.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -34,20 +34,21 @@ QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
-    "MainWindow",
-    "openWindow1",
+struct qt_meta_stringdata_CLASSwindow2ENDCLASS_t {};
+constexpr auto qt_meta_stringdata_CLASSwindow2ENDCLASS = QtMocHelpers::stringData(
+    "window2",
+    "on_calculateButton_clicked",
     "",
-    "openWindow2",
-    "openWindow3"
+    "on_resetButton_clicked",
+    "on_lineEdit_textChanged",
+    "text"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 } // unnamed namespace
 
-Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
+Q_CONSTINIT static const uint qt_meta_data_CLASSwindow2ENDCLASS[] = {
 
  // content:
       12,       // revision
@@ -63,64 +64,64 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
        1,    0,   32,    2, 0x08,    1 /* Private */,
        3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       4,    1,   34,    2, 0x08,    3 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    5,
 
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject window2::staticMetaObject = { {
     QMetaObject::SuperData::link<QMainWindow::staticMetaObject>(),
-    qt_meta_stringdata_CLASSMainWindowENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSMainWindowENDCLASS,
+    qt_meta_stringdata_CLASSwindow2ENDCLASS.offsetsAndSizes,
+    qt_meta_data_CLASSwindow2ENDCLASS,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
+    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSwindow2ENDCLASS_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
-        // method 'openWindow1'
+        QtPrivate::TypeAndForceComplete<window2, std::true_type>,
+        // method 'on_calculateButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'openWindow2'
+        // method 'on_resetButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'openWindow3'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        // method 'on_lineEdit_textChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
 
-void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void window2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<MainWindow *>(_o);
+        auto *_t = static_cast<window2 *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->openWindow1(); break;
-        case 1: _t->openWindow2(); break;
-        case 2: _t->openWindow3(); break;
+        case 0: _t->on_calculateButton_clicked(); break;
+        case 1: _t->on_resetButton_clicked(); break;
+        case 2: _t->on_lineEdit_textChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
-const QMetaObject *MainWindow::metaObject() const
+const QMetaObject *window2::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *MainWindow::qt_metacast(const char *_clname)
+void *window2::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_CLASSMainWindowENDCLASS.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_CLASSwindow2ENDCLASS.stringdata0))
         return static_cast<void*>(this);
     return QMainWindow::qt_metacast(_clname);
 }
 
-int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int window2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
