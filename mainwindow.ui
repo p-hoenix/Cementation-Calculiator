@@ -1,0 +1,2254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>575</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>575</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>930</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>2</x>
+      <y>0</y>
+      <width>571</width>
+      <height>481</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Розрахунок по колонам</string>
+     </attribute>
+     <widget class="QComboBox" name="wellTypeComboBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>10</y>
+        <width>300</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>1 колона</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>2 колони</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>3 колони</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Тип свердловини</string>
+      </property>
+     </widget>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>575</width>
+        <height>400</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="stackedWidgetPage1">
+       <widget class="QLineEdit" name="cementHeightLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wellDiameterLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string comment="Глибина спуску в метрах"/>
+        </property>
+        <property name="locale">
+         <locale language="Ukrainian" country="Ukraine"/>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::InputMethodHint::ImhFormattedNumbersOnly</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="resultsTextEdit">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>260</y>
+          <width>551</width>
+          <height>141</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_38">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Глибина спуску </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_36">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Коефіцієнт кавернозності </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_35">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Товщина стінки</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_37">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_32">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Внутрішній діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_34">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр свердловини </string>
+        </property>
+        <property name="buddy">
+         <cstring>label_34</cstring>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_33">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Висота цементного стакана </string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>551</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QPushButton" name="clearButton">
+           <property name="text">
+            <string>Очистити</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="calculateButton">
+           <property name="text">
+            <string>Розрахувати</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page">
+       <widget class="QLineEdit" name="wellDiameterLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cementHeightLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="resultsTextEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>260</y>
+          <width>551</width>
+          <height>141</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wellDiameterLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cementHeightLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_45">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Глибина спуску </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_40">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Висота цементного стакана</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_44">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_39">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Внутрішній діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_41">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр свердловини</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_43">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Коефіцієнт кавернозності </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_42">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Товщина стінки</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>551</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QPushButton" name="clearButton_2">
+           <property name="text">
+            <string>Очистити</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="calculateButton_2">
+           <property name="text">
+            <string>Розрахувати</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button_2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button_2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton_2">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button_3">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button_3">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton_3">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <widget class="QLineEdit" name="cementHeightLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_25">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>70</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wellDiameterLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::InputMethodHint::ImhFormattedNumbersOnly|Qt::InputMethodHint::ImhPreferNumbers</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_26">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>100</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Товщина стінки </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_27">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>160</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Висота цементного стакана</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wellDiameterLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_28">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>190</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Коефіцієнт кавернозності </string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="depthLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>10</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cementHeightLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_29">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>40</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Діаметр свердловини </string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cementHeightLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>160</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="columnDiameterLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>70</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="innerDiameterLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>130</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="cavernosityCoeffLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>190</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>1.2</string>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="resultsTextEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>260</y>
+          <width>551</width>
+          <height>141</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_30">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>130</y>
+          <width>210</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Внутрішній діаметр колони </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_31">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>10</y>
+          <width>91</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Глибина спуску </string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wallThicknessLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>100</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="wellDiameterLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>40</y>
+          <width>100</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>220</y>
+          <width>551</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QPushButton" name="clearButton_3">
+           <property name="text">
+            <string>Очистити</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="calculateButton_3">
+           <property name="text">
+            <string>Розрахувати</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton_4">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton_5">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button_5">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button_5">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateTButton_6">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>100</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD2Button_6">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>130</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="calculateD1Button_6">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>70</y>
+          <width>25</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="showDetailedInfo">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>10</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="sizeIncrement">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>?</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Ліквідаційний тампонаж</string>
+     </attribute>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Глибина свердловини (H)</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Діаметр свердловини (D)</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>190</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Коефіцієнт водоцементного відношення (В/Ц)</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_2">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>40</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Коефіцієнт кавернозності (K)</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>70</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_6">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>160</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>340</y>
+        <width>551</width>
+        <height>111</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_5">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>130</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_7">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>190</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Діаметр зовнішньої колони (d1)</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Висота цементації (Hц)</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>10</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>100</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Товщина стінки колони (t)</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_8">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>220</y>
+        <width>100</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>220</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Щільність цементного розчину</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="calculateButton_T">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>310</y>
+        <width>200</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Розрахувати</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>310</y>
+        <width>200</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Очистити</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>250</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Тип промивальної рідини</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>250</y>
+        <width>151</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Вода</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Масло</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Бензин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Гліколі</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Глиняний розчин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Полімерний розчин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Сольовий розчин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Лужний розчин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Морська вода</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Кислота</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Нейтральний розчин</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Трансферний розчин</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>490</y>
+      <width>461</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>575</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <widget class="QMenu" name="helpMenu">
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>Допомога</string>
+    </property>
+    <addaction name="About"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="helpMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action">
+   <property name="text">
+    <string>Открыть...</string>
+   </property>
+  </action>
+  <action name="About">
+   <property name="text">
+    <string>Про програму</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>depthLineEdit</tabstop>
+  <tabstop>wellDiameterLineEdit</tabstop>
+  <tabstop>columnDiameterLineEdit</tabstop>
+  <tabstop>calculateD1Button</tabstop>
+  <tabstop>wallThicknessLineEdit</tabstop>
+  <tabstop>calculateTButton</tabstop>
+  <tabstop>innerDiameterLineEdit</tabstop>
+  <tabstop>calculateD2Button</tabstop>
+  <tabstop>cementHeightLineEdit</tabstop>
+  <tabstop>cavernosityCoeffLineEdit</tabstop>
+  <tabstop>resultsTextEdit</tabstop>
+  <tabstop>depthLineEdit_2</tabstop>
+  <tabstop>wellDiameterLineEdit_2</tabstop>
+  <tabstop>columnDiameterLineEdit_2</tabstop>
+  <tabstop>calculateD1Button_2</tabstop>
+  <tabstop>wallThicknessLineEdit_2</tabstop>
+  <tabstop>calculateTButton_2</tabstop>
+  <tabstop>innerDiameterLineEdit_2</tabstop>
+  <tabstop>calculateD2Button_2</tabstop>
+  <tabstop>cementHeightLineEdit_2</tabstop>
+  <tabstop>cavernosityCoeffLineEdit_2</tabstop>
+  <tabstop>depthLineEdit_3</tabstop>
+  <tabstop>wellDiameterLineEdit_3</tabstop>
+  <tabstop>columnDiameterLineEdit_3</tabstop>
+  <tabstop>calculateD1Button_3</tabstop>
+  <tabstop>wallThicknessLineEdit_3</tabstop>
+  <tabstop>calculateTButton_3</tabstop>
+  <tabstop>innerDiameterLineEdit_3</tabstop>
+  <tabstop>calculateD2Button_3</tabstop>
+  <tabstop>cementHeightLineEdit_3</tabstop>
+  <tabstop>cavernosityCoeffLineEdit_3</tabstop>
+  <tabstop>calculateButton_2</tabstop>
+  <tabstop>clearButton_2</tabstop>
+  <tabstop>resultsTextEdit_2</tabstop>
+  <tabstop>depthLineEdit_4</tabstop>
+  <tabstop>wellDiameterLineEdit_4</tabstop>
+  <tabstop>columnDiameterLineEdit_4</tabstop>
+  <tabstop>calculateD1Button_4</tabstop>
+  <tabstop>wallThicknessLineEdit_4</tabstop>
+  <tabstop>calculateTButton_4</tabstop>
+  <tabstop>innerDiameterLineEdit_4</tabstop>
+  <tabstop>calculateD2Button_4</tabstop>
+  <tabstop>cementHeightLineEdit_4</tabstop>
+  <tabstop>cavernosityCoeffLineEdit_4</tabstop>
+  <tabstop>depthLineEdit_5</tabstop>
+  <tabstop>wellDiameterLineEdit_5</tabstop>
+  <tabstop>columnDiameterLineEdit_5</tabstop>
+  <tabstop>calculateD1Button_5</tabstop>
+  <tabstop>wallThicknessLineEdit_5</tabstop>
+  <tabstop>calculateTButton_5</tabstop>
+  <tabstop>innerDiameterLineEdit_5</tabstop>
+  <tabstop>calculateD2Button_5</tabstop>
+  <tabstop>cementHeightLineEdit_5</tabstop>
+  <tabstop>cavernosityCoeffLineEdit_5</tabstop>
+  <tabstop>depthLineEdit_6</tabstop>
+  <tabstop>wellDiameterLineEdit_6</tabstop>
+  <tabstop>columnDiameterLineEdit_6</tabstop>
+  <tabstop>calculateD1Button_6</tabstop>
+  <tabstop>wallThicknessLineEdit_6</tabstop>
+  <tabstop>calculateTButton_6</tabstop>
+  <tabstop>innerDiameterLineEdit_6</tabstop>
+  <tabstop>calculateD2Button_6</tabstop>
+  <tabstop>cementHeightLineEdit_6</tabstop>
+  <tabstop>cavernosityCoeffLineEdit_6</tabstop>
+  <tabstop>calculateButton_3</tabstop>
+  <tabstop>clearButton_3</tabstop>
+  <tabstop>resultsTextEdit_3</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>wellTypeComboBox</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>lineEdit_4</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>lineEdit_6</tabstop>
+  <tabstop>lineEdit_7</tabstop>
+  <tabstop>lineEdit_8</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>calculateButton_T</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

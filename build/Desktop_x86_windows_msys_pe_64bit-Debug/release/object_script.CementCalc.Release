@@ -1,0 +1,10 @@
+release/main.o
+release/mainwindow.o
+release/window1.o
+release/window2.o
+release/window3.o
+release/qrc_qmake_qmake_qm_files.o
+release/moc_mainwindow.o
+release/moc_window1.o
+release/moc_window2.o
+release/moc_window3.o
