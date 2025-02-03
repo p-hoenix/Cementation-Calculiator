@@ -350,7 +350,7 @@ void MainWindow::createActions()
 void MainWindow::about()
 {
     QMessageBox::about(this, "Про програму",
-                       "<h2>CementCalc 1.5.7</h2>"
+                       "<h2>CementCalc 1.1.0</h2>"
                        "<p><b>Програма для розрахунку матеріалів цементації обсадних колон.</b></p>"
                        "<p>Функціонал:</p>"
                        "<ul>"

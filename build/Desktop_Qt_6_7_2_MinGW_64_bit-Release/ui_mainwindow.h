@@ -63,7 +63,6 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QPushButton *clearButton;
     QPushButton *calculateButton;
-    QPushButton *showDetailedInfo_2;
     QWidget *page;
     QLineEdit *wellDiameterLineEdit_2;
     QLineEdit *depthLineEdit_3;
@@ -97,7 +96,6 @@ public:
     QPushButton *calculateD2Button_3;
     QPushButton *calculateD1Button_3;
     QPushButton *calculateTButton_3;
-    QPushButton *showDetailedInfo_3;
     QWidget *page_2;
     QLineEdit *cementHeightLineEdit_6;
     QLineEdit *columnDiameterLineEdit_4;
@@ -164,6 +162,7 @@ public:
     QPushButton *pushButton_4;
     QLabel *label_11;
     QComboBox *comboBox;
+    QLabel *errorLabel;
     QMenuBar *menubar;
     QMenu *helpMenu;
     QStatusBar *statusbar;
@@ -183,7 +182,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
-        tabWidget->setGeometry(QRect(2, 0, 571, 496));
+        tabWidget->setGeometry(QRect(2, 0, 571, 461));
         tab = new QWidget();
         tab->setObjectName("tab");
         wellTypeComboBox = new QComboBox(tab);
@@ -191,16 +190,16 @@ public:
         wellTypeComboBox->addItem(QString());
         wellTypeComboBox->addItem(QString());
         wellTypeComboBox->setObjectName("wellTypeComboBox");
-        wellTypeComboBox->setGeometry(QRect(270, 10, 300, 25));
+        wellTypeComboBox->setGeometry(QRect(150, 10, 300, 25));
         label = new QLabel(tab);
         label->setObjectName("label");
-        label->setGeometry(QRect(130, 10, 131, 21));
+        label->setGeometry(QRect(10, 10, 131, 21));
         QFont font;
         font.setPointSize(11);
         label->setFont(font);
         stackedWidget = new QStackedWidget(tab);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(10, 40, 575, 400));
+        stackedWidget->setGeometry(QRect(10, 40, 575, 381));
         stackedWidgetPage1 = new QWidget();
         stackedWidgetPage1->setObjectName("stackedWidgetPage1");
         cementHeightLineEdit = new QLineEdit(stackedWidgetPage1);
@@ -237,7 +236,7 @@ public:
         cavernosityCoeffLineEdit->setMaximumSize(QSize(100, 25));
         resultsTextEdit = new QTextEdit(stackedWidgetPage1);
         resultsTextEdit->setObjectName("resultsTextEdit");
-        resultsTextEdit->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit->setGeometry(QRect(0, 260, 551, 121));
         wallThicknessLineEdit = new QLineEdit(stackedWidgetPage1);
         wallThicknessLineEdit->setObjectName("wallThicknessLineEdit");
         wallThicknessLineEdit->setGeometry(QRect(450, 100, 100, 25));
@@ -289,11 +288,6 @@ public:
 
         horizontalLayout_4->addWidget(calculateButton);
 
-        showDetailedInfo_2 = new QPushButton(stackedWidgetPage1);
-        showDetailedInfo_2->setObjectName("showDetailedInfo_2");
-        showDetailedInfo_2->setGeometry(QRect(100, 10, 25, 25));
-        showDetailedInfo_2->setMinimumSize(QSize(25, 25));
-        showDetailedInfo_2->setSizeIncrement(QSize(25, 25));
         stackedWidget->addWidget(stackedWidgetPage1);
         page = new QWidget();
         page->setObjectName("page");
@@ -334,7 +328,7 @@ public:
         cavernosityCoeffLineEdit_3->setMaximumSize(QSize(100, 25));
         resultsTextEdit_2 = new QTextEdit(page);
         resultsTextEdit_2->setObjectName("resultsTextEdit_2");
-        resultsTextEdit_2->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit_2->setGeometry(QRect(0, 260, 551, 121));
         wallThicknessLineEdit_2 = new QLineEdit(page);
         wallThicknessLineEdit_2->setObjectName("wallThicknessLineEdit_2");
         wallThicknessLineEdit_2->setGeometry(QRect(340, 100, 100, 25));
@@ -425,11 +419,6 @@ public:
         calculateTButton_3 = new QPushButton(page);
         calculateTButton_3->setObjectName("calculateTButton_3");
         calculateTButton_3->setGeometry(QRect(530, 100, 25, 25));
-        showDetailedInfo_3 = new QPushButton(page);
-        showDetailedInfo_3->setObjectName("showDetailedInfo_3");
-        showDetailedInfo_3->setGeometry(QRect(100, 10, 25, 25));
-        showDetailedInfo_3->setMinimumSize(QSize(25, 25));
-        showDetailedInfo_3->setSizeIncrement(QSize(25, 25));
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
@@ -546,7 +535,7 @@ public:
         cavernosityCoeffLineEdit_4->setMaximumSize(QSize(100, 25));
         resultsTextEdit_3 = new QTextEdit(page_2);
         resultsTextEdit_3->setObjectName("resultsTextEdit_3");
-        resultsTextEdit_3->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit_3->setGeometry(QRect(0, 260, 551, 121));
         label_30 = new QLabel(page_2);
         label_30->setObjectName("label_30");
         label_30->setGeometry(QRect(0, 130, 210, 25));
@@ -606,12 +595,12 @@ public:
         calculateD1Button_6 = new QPushButton(page_2);
         calculateD1Button_6->setObjectName("calculateD1Button_6");
         calculateD1Button_6->setGeometry(QRect(530, 70, 25, 25));
-        showDetailedInfo = new QPushButton(page_2);
+        stackedWidget->addWidget(page_2);
+        showDetailedInfo = new QPushButton(tab);
         showDetailedInfo->setObjectName("showDetailedInfo");
-        showDetailedInfo->setGeometry(QRect(100, 10, 25, 25));
+        showDetailedInfo->setGeometry(QRect(460, 10, 25, 25));
         showDetailedInfo->setMinimumSize(QSize(25, 25));
         showDetailedInfo->setSizeIncrement(QSize(25, 25));
-        stackedWidget->addWidget(page_2);
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
@@ -644,7 +633,7 @@ public:
         lineEdit_6->setMaximumSize(QSize(100, 25));
         textEdit = new QTextEdit(tab_2);
         textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(10, 340, 551, 111));
+        textEdit->setGeometry(QRect(10, 310, 551, 111));
         lineEdit_5 = new QLineEdit(tab_2);
         lineEdit_5->setObjectName("lineEdit_5");
         lineEdit_5->setGeometry(QRect(420, 130, 100, 25));
@@ -684,10 +673,10 @@ public:
         label_10->setGeometry(QRect(10, 220, 341, 16));
         calculateButton_T = new QPushButton(tab_2);
         calculateButton_T->setObjectName("calculateButton_T");
-        calculateButton_T->setGeometry(QRect(260, 310, 200, 25));
+        calculateButton_T->setGeometry(QRect(260, 280, 200, 25));
         pushButton_4 = new QPushButton(tab_2);
         pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(10, 310, 200, 25));
+        pushButton_4->setGeometry(QRect(10, 280, 200, 25));
         label_11 = new QLabel(tab_2);
         label_11->setObjectName("label_11");
         label_11->setGeometry(QRect(10, 250, 341, 16));
@@ -707,6 +696,9 @@ public:
         comboBox->setObjectName("comboBox");
         comboBox->setGeometry(QRect(390, 250, 151, 25));
         tabWidget->addTab(tab_2, QString());
+        errorLabel = new QLabel(centralwidget);
+        errorLabel->setObjectName("errorLabel");
+        errorLabel->setGeometry(QRect(10, 470, 561, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -813,7 +805,7 @@ public:
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(0);
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -832,6 +824,7 @@ public:
 #if QT_CONFIG(tooltip)
         depthLineEdit->setToolTip(QString());
 #endif // QT_CONFIG(tooltip)
+        cavernosityCoeffLineEdit->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
         label_38->setText(QCoreApplication::translate("MainWindow", "\320\223\320\273\320\270\320\261\320\270\320\275\320\260 \321\201\320\277\321\203\321\201\320\272\321\203 ", nullptr));
         label_36->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\265\321\204\321\226\321\206\321\226\321\224\320\275\321\202 \320\272\320\260\320\262\320\265\321\200\320\275\320\276\320\267\320\275\320\276\321\201\321\202\321\226 ", nullptr));
         label_35->setText(QCoreApplication::translate("MainWindow", "\320\242\320\276\320\262\321\211\320\270\320\275\320\260 \321\201\321\202\321\226\320\275\320\272\320\270", nullptr));
@@ -844,7 +837,8 @@ public:
         calculateD2Button->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
         clearButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\320\270", nullptr));
         calculateButton->setText(QCoreApplication::translate("MainWindow", "\320\240\320\276\320\267\321\200\320\260\321\205\321\203\320\262\320\260\321\202\320\270", nullptr));
-        showDetailedInfo_2->setText(QCoreApplication::translate("MainWindow", "?", nullptr));
+        cavernosityCoeffLineEdit_3->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
+        cavernosityCoeffLineEdit_2->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
         label_45->setText(QCoreApplication::translate("MainWindow", "\320\223\320\273\320\270\320\261\320\270\320\275\320\260 \321\201\320\277\321\203\321\201\320\272\321\203 ", nullptr));
         label_40->setText(QCoreApplication::translate("MainWindow", "\320\222\320\270\321\201\320\276\321\202\320\260 \321\206\320\265\320\274\320\265\320\275\321\202\320\275\320\276\320\263\320\276 \321\201\321\202\320\260\320\272\320\260\320\275\320\260", nullptr));
         label_44->setText(QCoreApplication::translate("MainWindow", "\320\224\321\226\320\260\320\274\320\265\321\202\321\200 \320\272\320\276\320\273\320\276\320\275\320\270 ", nullptr));
@@ -860,13 +854,15 @@ public:
         calculateD2Button_3->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
         calculateD1Button_3->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
         calculateTButton_3->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
-        showDetailedInfo_3->setText(QCoreApplication::translate("MainWindow", "?", nullptr));
         label_25->setText(QCoreApplication::translate("MainWindow", "\320\224\321\226\320\260\320\274\320\265\321\202\321\200 \320\272\320\276\320\273\320\276\320\275\320\270 ", nullptr));
+        cavernosityCoeffLineEdit_6->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
         depthLineEdit_4->setText(QString());
         label_26->setText(QCoreApplication::translate("MainWindow", "\320\242\320\276\320\262\321\211\320\270\320\275\320\260 \321\201\321\202\321\226\320\275\320\272\320\270 ", nullptr));
         label_27->setText(QCoreApplication::translate("MainWindow", "\320\222\320\270\321\201\320\276\321\202\320\260 \321\206\320\265\320\274\320\265\320\275\321\202\320\275\320\276\320\263\320\276 \321\201\321\202\320\260\320\272\320\260\320\275\320\260", nullptr));
         label_28->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\265\321\204\321\226\321\206\321\226\321\224\320\275\321\202 \320\272\320\260\320\262\320\265\321\200\320\275\320\276\320\267\320\275\320\276\321\201\321\202\321\226 ", nullptr));
+        cavernosityCoeffLineEdit_5->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
         label_29->setText(QCoreApplication::translate("MainWindow", "\320\224\321\226\320\260\320\274\320\265\321\202\321\200 \321\201\320\262\320\265\321\200\320\264\320\273\320\276\320\262\320\270\320\275\320\270 ", nullptr));
+        cavernosityCoeffLineEdit_4->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
         label_30->setText(QCoreApplication::translate("MainWindow", "\320\222\320\275\321\203\321\202\321\200\321\226\321\210\320\275\321\226\320\271 \320\264\321\226\320\260\320\274\320\265\321\202\321\200 \320\272\320\276\320\273\320\276\320\275\320\270 ", nullptr));
         label_31->setText(QCoreApplication::translate("MainWindow", "\320\223\320\273\320\270\320\261\320\270\320\275\320\260 \321\201\320\277\321\203\321\201\320\272\321\203 ", nullptr));
         clearButton_3->setText(QCoreApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\320\270", nullptr));
@@ -907,6 +903,7 @@ public:
         comboBox->setItemText(11, QCoreApplication::translate("MainWindow", "\320\242\321\200\320\260\320\275\321\201\321\204\320\265\321\200\320\275\320\270\320\271 \321\200\320\276\320\267\321\207\320\270\320\275", nullptr));
 
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "\320\233\321\226\320\272\320\262\321\226\320\264\320\260\321\206\321\226\320\271\320\275\320\270\320\271 \321\202\320\260\320\274\320\277\320\276\320\275\320\260\320\266", nullptr));
+        errorLabel->setText(QString());
         helpMenu->setTitle(QCoreApplication::translate("MainWindow", "\320\224\320\276\320\277\320\276\320\274\320\276\320\263\320\260", nullptr));
     } // retranslateUi
 
