@@ -182,7 +182,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
-        tabWidget->setGeometry(QRect(2, 0, 571, 481));
+        tabWidget->setGeometry(QRect(2, 0, 571, 461));
         tab = new QWidget();
         tab->setObjectName("tab");
         wellTypeComboBox = new QComboBox(tab);
@@ -199,7 +199,7 @@ public:
         label->setFont(font);
         stackedWidget = new QStackedWidget(tab);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(10, 40, 575, 400));
+        stackedWidget->setGeometry(QRect(10, 40, 575, 381));
         stackedWidgetPage1 = new QWidget();
         stackedWidgetPage1->setObjectName("stackedWidgetPage1");
         cementHeightLineEdit = new QLineEdit(stackedWidgetPage1);
@@ -236,7 +236,7 @@ public:
         cavernosityCoeffLineEdit->setMaximumSize(QSize(100, 25));
         resultsTextEdit = new QTextEdit(stackedWidgetPage1);
         resultsTextEdit->setObjectName("resultsTextEdit");
-        resultsTextEdit->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit->setGeometry(QRect(0, 260, 551, 121));
         wallThicknessLineEdit = new QLineEdit(stackedWidgetPage1);
         wallThicknessLineEdit->setObjectName("wallThicknessLineEdit");
         wallThicknessLineEdit->setGeometry(QRect(450, 100, 100, 25));
@@ -328,7 +328,7 @@ public:
         cavernosityCoeffLineEdit_3->setMaximumSize(QSize(100, 25));
         resultsTextEdit_2 = new QTextEdit(page);
         resultsTextEdit_2->setObjectName("resultsTextEdit_2");
-        resultsTextEdit_2->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit_2->setGeometry(QRect(0, 260, 551, 121));
         wallThicknessLineEdit_2 = new QLineEdit(page);
         wallThicknessLineEdit_2->setObjectName("wallThicknessLineEdit_2");
         wallThicknessLineEdit_2->setGeometry(QRect(340, 100, 100, 25));
@@ -535,7 +535,7 @@ public:
         cavernosityCoeffLineEdit_4->setMaximumSize(QSize(100, 25));
         resultsTextEdit_3 = new QTextEdit(page_2);
         resultsTextEdit_3->setObjectName("resultsTextEdit_3");
-        resultsTextEdit_3->setGeometry(QRect(0, 260, 551, 141));
+        resultsTextEdit_3->setGeometry(QRect(0, 260, 551, 121));
         label_30 = new QLabel(page_2);
         label_30->setObjectName("label_30");
         label_30->setGeometry(QRect(0, 130, 210, 25));
@@ -633,7 +633,7 @@ public:
         lineEdit_6->setMaximumSize(QSize(100, 25));
         textEdit = new QTextEdit(tab_2);
         textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(10, 340, 551, 111));
+        textEdit->setGeometry(QRect(10, 310, 551, 111));
         lineEdit_5 = new QLineEdit(tab_2);
         lineEdit_5->setObjectName("lineEdit_5");
         lineEdit_5->setGeometry(QRect(420, 130, 100, 25));
@@ -673,10 +673,10 @@ public:
         label_10->setGeometry(QRect(10, 220, 341, 16));
         calculateButton_T = new QPushButton(tab_2);
         calculateButton_T->setObjectName("calculateButton_T");
-        calculateButton_T->setGeometry(QRect(260, 310, 200, 25));
+        calculateButton_T->setGeometry(QRect(260, 280, 200, 25));
         pushButton_4 = new QPushButton(tab_2);
         pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(10, 310, 200, 25));
+        pushButton_4->setGeometry(QRect(10, 280, 200, 25));
         label_11 = new QLabel(tab_2);
         label_11->setObjectName("label_11");
         label_11->setGeometry(QRect(10, 250, 341, 16));
@@ -698,7 +698,7 @@ public:
         tabWidget->addTab(tab_2, QString());
         errorLabel = new QLabel(centralwidget);
         errorLabel->setObjectName("errorLabel");
-        errorLabel->setGeometry(QRect(10, 490, 461, 16));
+        errorLabel->setGeometry(QRect(10, 470, 561, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -804,8 +804,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
-        stackedWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -903,7 +903,7 @@ public:
         comboBox->setItemText(11, QCoreApplication::translate("MainWindow", "\320\242\321\200\320\260\320\275\321\201\321\204\320\265\321\200\320\275\320\270\320\271 \321\200\320\276\320\267\321\207\320\270\320\275", nullptr));
 
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "\320\233\321\226\320\272\320\262\321\226\320\264\320\260\321\206\321\226\320\271\320\275\320\270\320\271 \321\202\320\260\320\274\320\277\320\276\320\275\320\260\320\266", nullptr));
-        errorLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        errorLabel->setText(QString());
         helpMenu->setTitle(QCoreApplication::translate("MainWindow", "\320\224\320\276\320\277\320\276\320\274\320\276\320\263\320\260", nullptr));
     } // retranslateUi
 

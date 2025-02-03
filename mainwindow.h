@@ -23,6 +23,10 @@ public slots:
 
 private slots:
 
+    void setupValidators();
+
+    void updateErrorLabel();
+
     void calculateResults(); // Слот для расчётов
 
     void calculateResults_2(); // Слот для расчётов

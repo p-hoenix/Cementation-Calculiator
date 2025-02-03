@@ -10,12 +10,14 @@
 #include <cmath>
 #include <QDockWidget>
 #include "InfoWidget.h"
-
+#include <QDoubleValidator>
+#include <QIntValidator>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setupValidators();  // Добавляем валидацию
 
     // Установка заголовка окна
     setWindowTitle("Калькулятор цементувания обсадних колон");
@@ -230,6 +232,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->calculateButton, &QPushButton::clicked, this, &MainWindow::calculateResults);
     connect(ui->calculateButton_2, &QPushButton::clicked, this, &MainWindow::calculateResults_2);
     connect(ui->calculateButton_3, &QPushButton::clicked, this, &MainWindow::calculateResults_3);
+    connect(ui->textEdit, &QTextEdit::textChanged, this, &MainWindow::updateErrorLabel);
+
 
     // Создаём поле для вывода результатов
     resultsTextEdit = new QTextEdit(this);
@@ -266,6 +270,65 @@ void MainWindow::showDetailedInfo() {
     infoWindow->show();
 }
 
+void MainWindow::setupValidators() {
+    // Установим валидаторы для полей
+    QIntValidator* intValidator = new QIntValidator(0, 1000000, this);  // Для целых чисел от 0 до 1000000
+    QDoubleValidator* doubleValidator = new QDoubleValidator(0, 1000000, 2, this);  // Для чисел с плавающей точкой
+
+    // Применяем валидаторы для первой колонки
+    ui->depthLineEdit->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit->setValidator(doubleValidator);
+    ui->cementHeightLineEdit->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit->setValidator(doubleValidator);
+
+    // Применяем валидаторы для второй колонки
+    ui->depthLineEdit_2->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit_2->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit_2->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit_2->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit_2->setValidator(doubleValidator);
+    ui->cementHeightLineEdit_2->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit_2->setValidator(doubleValidator);
+
+    // Применяем валидаторы для третьей колонки
+    ui->depthLineEdit_3->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit_3->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit_3->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit_3->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit_3->setValidator(doubleValidator);
+    ui->cementHeightLineEdit_3->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit_3->setValidator(doubleValidator);
+
+    // Применяем валидаторы для четвертой колонки
+    ui->depthLineEdit_4->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit_4->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit_4->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit_4->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit_4->setValidator(doubleValidator);
+    ui->cementHeightLineEdit_4->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit_4->setValidator(doubleValidator);
+
+    // Применяем валидаторы для пятой колонки
+    ui->depthLineEdit_5->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit_5->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit_5->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit_5->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit_5->setValidator(doubleValidator);
+    ui->cementHeightLineEdit_5->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit_5->setValidator(doubleValidator);
+
+    // Применяем валидаторы для шестой колонки
+    ui->depthLineEdit_6->setValidator(doubleValidator);
+    ui->wellDiameterLineEdit_6->setValidator(doubleValidator);
+    ui->columnDiameterLineEdit_6->setValidator(doubleValidator);
+    ui->innerDiameterLineEdit_6->setValidator(doubleValidator);
+    ui->wallThicknessLineEdit_6->setValidator(doubleValidator);
+    ui->cementHeightLineEdit_6->setValidator(doubleValidator);
+    ui->cavernosityCoeffLineEdit_6->setValidator(doubleValidator);
+}
 
 void MainWindow::on_wellTypeComboBox_currentIndexChanged(int index)
 {
@@ -432,31 +495,31 @@ void MainWindow::calculateResults() {
 
     // Проверка входных данных
     if (D <= 0 || d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: все размеры должны быть положительными числами.");
+        ui->errorLabel->setText("Ошибка: все размеры должны быть положительными числами.");
         return;
     }
     if (d1 <= d2) {
-        ui->resultsTextEdit->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
+        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
         return;
     }
     if (d1 >= D) {
-        ui->resultsTextEdit->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
         return;
     }
     if (d2 >= D) {
-        ui->resultsTextEdit->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
         return;
     }
     if (H <= 0 || h < 0 || K <= 0 || t < 0) {
-        ui->resultsTextEdit->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
         return;
     }
     if (t < 0 && !tText.isEmpty()) {
-        ui->resultsTextEdit->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
         return;
     }
     if (h > H) {
-        ui->resultsTextEdit->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
+        ui->errorLabel->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
         return;
     }
 
@@ -508,33 +571,33 @@ void MainWindow::calculateResults_3()
     // Проверка входных данных
     // Проверяем логическую последовательность диаметров
     if (D <= 0 || d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: все размеры должны быть положительными числами.");
+        ui->errorLabel->setText("Ошибка: все размеры должны быть положительными числами.");
         return;
     }
     if (d1 <= d2) {
-        ui->resultsTextEdit->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
+        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
         return;
     }
     if (d1 >= D) {
-        ui->resultsTextEdit->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
         return;
     }
     if (d2 >= D) {
-        ui->resultsTextEdit->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
         return;
     }
     if (H <= 0 || h < 0 || K <= 0 || t < 0) {
-        ui->resultsTextEdit->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
         return;
     }
     // Проверка на отрицательную толщину только если поле не пустое
     if (t < 0 && !tText.isEmpty()) {
-        ui->resultsTextEdit->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
         return;
     }
     // Проверка, что высота цементного стакана не может быть больше глубины
     if (h > H) {
-        ui->resultsTextEdit->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
+        ui->errorLabel->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
         return;
     }
 
@@ -742,7 +805,7 @@ void MainWindow::on_calculateD1Button_2_clicked()
 
     // Проверка, что d2 и t заданы
     if (d2 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
         return;
     }
 
@@ -760,7 +823,7 @@ void MainWindow::on_calculateD1Button_3_clicked()
 
     // Проверка, что d2 и t заданы
     if (d2 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
         return;
     }
 
@@ -778,7 +841,7 @@ void MainWindow::on_calculateD1Button_4_clicked()
 
     // Проверка, что d2 и t заданы
     if (d2 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
         return;
     }
 
@@ -796,7 +859,7 @@ void MainWindow::on_calculateD1Button_5_clicked()
 
     // Проверка, что d2 и t заданы
     if (d2 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
         return;
     }
 
@@ -814,7 +877,7 @@ void MainWindow::on_calculateD1Button_6_clicked()
 
     // Проверка, что d2 и t заданы
     if (d2 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d2 и t для вычисления d1.");
         return;
     }
 
@@ -833,7 +896,7 @@ void MainWindow::on_calculateD2Button_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -850,7 +913,7 @@ void MainWindow::on_calculateD2Button_2_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -867,7 +930,7 @@ void MainWindow::on_calculateD2Button_3_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -884,7 +947,7 @@ void MainWindow::on_calculateD2Button_4_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -901,7 +964,7 @@ void MainWindow::on_calculateD2Button_5_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -918,7 +981,7 @@ void MainWindow::on_calculateD2Button_6_clicked()
 
     // Проверка, что d1 и t заданы
     if (d1 <= 0 || t <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и t для вычисления d2.");
         return;
     }
 
@@ -935,7 +998,7 @@ void MainWindow::on_calculateTButton_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -952,7 +1015,7 @@ void MainWindow::on_calculateTButton_2_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -969,7 +1032,7 @@ void MainWindow::on_calculateTButton_3_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -986,7 +1049,7 @@ void MainWindow::on_calculateTButton_4_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -1003,7 +1066,7 @@ void MainWindow::on_calculateTButton_5_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -1020,7 +1083,7 @@ void MainWindow::on_calculateTButton_6_clicked()
 
     // Проверка, что d1 и d2 заданы
     if (d1 <= 0 || d2 <= 0) {
-        ui->resultsTextEdit->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
+        ui->errorLabel->setText("Ошибка: необходимо ввести d1 и d2 для вычисления t.");
         return;
     }
 
@@ -1056,3 +1119,16 @@ void MainWindow::on_calculateButton_3_clicked()
 
 }
 
+void MainWindow::updateErrorLabel()
+{
+    // Получаем текст из QTextEdit, который содержит ошибки
+    QString errorText = ui->textEdit->toPlainText();
+
+    // Если в QTextEdit есть ошибки, выводим их в errorLabel
+    if (!errorText.isEmpty()) {
+        ui->errorLabel->setText(errorText);
+    } else {
+        // Если нет ошибок, очищаем errorLabel
+        ui->errorLabel->clear();
+    }
+}
