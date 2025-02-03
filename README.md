@@ -14,7 +14,7 @@
 - Windows 10/11
 
 ## Установка
-1. Завантажте останню версію з [Release розділу](https://github.com/p-hoenix/Cementation-Calculiator/tree/main/release).
+1. Завантажте останню версію з [Release розділу](https://github.com/p-hoenix/Cementation-Calculiator/releases/tag/1.10).
 2. Розпакуйте архів та запустіть `setup.exe`.
 
 ## Ліцензія
