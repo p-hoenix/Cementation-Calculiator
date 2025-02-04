@@ -34,6 +34,7 @@ class Ui_MainWindow
 public:
     QAction *action;
     QAction *About;
+    QAction *CWR;
     QWidget *centralwidget;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -178,6 +179,8 @@ public:
         action->setObjectName("action");
         About = new QAction(MainWindow);
         About->setObjectName("About");
+        CWR = new QAction(MainWindow);
+        CWR->setObjectName("CWR");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         tabWidget = new QTabWidget(centralwidget);
@@ -816,6 +819,7 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         action->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214...", nullptr));
         About->setText(QCoreApplication::translate("MainWindow", "\320\237\321\200\320\276 \320\277\321\200\320\276\320\263\321\200\320\260\320\274\321\203", nullptr));
+        CWR->setText(QCoreApplication::translate("MainWindow", "\320\227\320\274\321\226\320\275\320\270\321\202\320\270 \321\201\320\277\321\226\320\262\320\262\321\226\320\264\320\275\320\276\321\210\320\265\320\275\320\275\321\217 \320\222/\320\246", nullptr));
         wellTypeComboBox->setItemText(0, QCoreApplication::translate("MainWindow", "1 \320\272\320\276\320\273\320\276\320\275\320\260", nullptr));
         wellTypeComboBox->setItemText(1, QCoreApplication::translate("MainWindow", "2 \320\272\320\276\320\273\320\276\320\275\320\270", nullptr));
         wellTypeComboBox->setItemText(2, QCoreApplication::translate("MainWindow", "3 \320\272\320\276\320\273\320\276\320\275\320\270", nullptr));

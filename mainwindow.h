@@ -101,6 +101,8 @@ private slots:
 
     void updateCalculateButton_3State();
 
+    void onChangeWCRAction();
+
 protected:
     void enterEvent(QEnterEvent *event) override;
 
@@ -115,6 +117,9 @@ private:
     QWidget *window3;  // Виджет для расчёта 3
     QDockWidget *infoDockWidget = nullptr;
     InfoWidget *infoWindow = nullptr;
+    QMenu *SMenu;  // Меню настроек
+    QAction *CWR;  // Действие для изменения соотношения вода-цемент
+    double currentWCR = 1.0;
 };
 
 #endif // MAINWINDOW_H

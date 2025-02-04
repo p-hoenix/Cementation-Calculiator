@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QComboBox>
+#include <QInputDialog>
 #include <QTimer>
 #include <QTextEdit>
 #include <QMessageBox>
@@ -19,6 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setupValidators();  // Добавляем валидацию
+    SMenu = menuBar()->addMenu("Налаштування"); // Создаём меню "Налаштування"
+    CWR = new QAction("Змінити співвідношення вода/цемент", this);
+    connect(CWR, &QAction::triggered, this, &MainWindow::onChangeWCRAction);
+    SMenu->addAction(CWR);
+    qDebug() << "Connected CWR action!";
 
     // Установка заголовка окна
     setWindowTitle("Калькулятор цементувания обсадних колон");
@@ -547,13 +553,13 @@ void MainWindow::calculateResults() {
     if (Vпр < 0) Vпр = 0;
 
     // Расчёт цемента и воды
-    double Qц = Vцр * 1.23 * 1.05;  // Необходимое количество цемента
-    double Vв = Vцр * 0.6 * 1.5;    // Необходимое количество воды
+    double Qц = Vцр *  1.23 * 1.05;  // Необходимое количество цемента
+    double Vв = Vцр *  (1 - currentWCR) * 2;    // Необходимое количество воды
 
     // Вывод результатов
     ui->resultsTextEdit->setText(QString(
-                                     "Об'єм тампонажного розчину : %1 м³\n"
-                                     "Об'єм промивної рідини : %2 м³\n"
+                                     "Об'єм тампонажного розчину Vцр: %1 м³\n"
+                                     "Об'єм промивної рідини Vпр: %2 м³\n"
                                      "Необхідна кількість цементу : %3 т\n"
                                      "Необхідна кількість води : %4 м³\n\n")
                                      .arg(Vцр + Vпр, 0, 'f', 4)
@@ -692,12 +698,12 @@ void MainWindow::calculateResults_3() {
     if (Vпр3 < 0) Vпр3 = 0;
 
     // Розрахунок цементу та води
-    double Qц1 = Vцр1 * 1.23 * 1.05;  // Необхідна кількість цементу для першої колони
-    double Vв1 = Vцр1 * 0.6 * 1.5;    // Необхідна кількість води для першої колони
-    double Qц2 = Vцр2 * 1.23 * 1.05;  // Необхідна кількість цементу для другої колони
-    double Vв2 = Vцр2 * 0.6 * 1.5;    // Необхідна кількість води для другої колони
-    double Qц3 = Vцр3 * 1.23 * 1.05;  // Необхідна кількість цементу для третьої колони
-    double Vв3 = Vцр3 * 0.6 * 1.5;    // Необхідна кількість води для третьої колони
+    double Qц1 = Vцр1 *  currentWCR;  // Необхідна кількість цементу для першої колони
+    double Vв1 = Vцр1 *  currentWCR * 1.5;    // Необхідна кількість води для першої колони
+    double Qц2 = Vцр2 *  currentWCR;  // Необхідна кількість цементу для другої колони
+    double Vв2 = Vцр2 *  currentWCR * 1.5;    // Необхідна кількість води для другої колони
+    double Qц3 = Vцр3 *  currentWCR;  // Необхідна кількість цементу для третьої колони
+    double Vв3 = Vцр3 *  currentWCR * 1.5;    // Необхідна кількість води для третьої колони
 
     ui->resultsTextEdit_3->setText(QString(
                                          "Об'єм тампонажного розчину для першої колони: %1 м³\n"
@@ -814,13 +820,13 @@ void MainWindow::calculateResults_2() {
     if (Vпр2 < 0) Vпр2 = 0;
 
     // Расчёт цемента и воды
-    double Qц1 = Vцр1 * 1.23 * 1.05;  // Необходимое количество цемента для первой колонны
-    double Vв1 = Vцр1 * 0.6 * 1.5;    // Необходимое количество воды для первой колонны
-    double Qц2 = Vцр2 * 1.23 * 1.05;  // Необходимое количество цемента для второй колонны
-    double Vв2 = Vцр2 * 0.6 * 1.5;    // Необходимое количество воды для второй колонны
+    double Qц1 = Vцр1 *  currentWCR;  // Необходимое количество цемента для первой колонны
+    double Vв1 = Vцр1 *  currentWCR * 1.5;    // Необходимое количество воды для первой колонны
+    double Qц2 = Vцр2 *  currentWCR;  // Необходимое количество цемента для второй колонны
+    double Vв2 = Vцр2 *  currentWCR * 1.5;    // Необходимое количество воды для второй колонны
 
     // Вывод результатов
-    ui->resultsTextEdit->setText(QString(
+    ui->resultsTextEdit_2->setText(QString(
                                      "Объем тампонажного раствора для первой колонны: %1 м³\n"
                                      "Объем промывочной жидкости для первой колонны: %2 м³\n"
                                      "Необходимое количество цемента для первой колонны: %3 т\n"
@@ -1351,4 +1357,49 @@ void MainWindow::enterEvent(QEnterEvent *event)
         ui->errorLabel->setText("");
         ui->errorLabel->setVisible(true);  // Показываем метку с ошибкой
     }
+}
+
+void MainWindow::onChangeWCRAction() {
+    // Создаём диалоговое окно
+    QDialog dialog(this);
+    dialog.setWindowTitle("Вибір співвідношення вода/цемент");
+
+    // Создаём выпадающий список
+    QComboBox *comboBox = new QComboBox(&dialog);
+    comboBox->addItem("1:1");
+    comboBox->addItem("1:2");
+    comboBox->addItem("1:3");
+    comboBox->addItem("1:4");
+    comboBox->addItem("Інший");  // Пункт для ввода своего значения
+
+    // Кнопка "ОК"
+    QPushButton *okButton = new QPushButton("OK", &dialog);
+
+    // Размещение элементов
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(comboBox);
+    layout->addWidget(okButton);
+    dialog.setLayout(layout);
+
+    // Обработчик кнопки "ОК"
+    connect(okButton, &QPushButton::clicked, [&]() {
+        if (comboBox->currentText() == "Інший") {
+            bool ok;
+            double customValue = QInputDialog::getDouble(this, "Введіть значення",
+                                                         "Співвідношення вода/цемент:",
+                                                         1.0, 0.1, 10.0, 2, &ok);
+            if (ok) {
+                currentWCR = customValue;
+            }
+        } else {
+            currentWCR = comboBox->currentText().section(':', 1, 1).toDouble();
+        }
+        dialog.accept();
+    });
+
+    // Запуск диалогового окна
+    dialog.exec();
+
+    // Проверяем, какое значение выбрал пользователь
+    qDebug() << "Обране значення W/C:" << currentWCR;
 }
