@@ -5,11 +5,12 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QComboBox>
+#include <QTimer>
 #include <QTextEdit>
 #include <QMessageBox>
 #include <cmath>
 #include <QDockWidget>
-#include "InfoWidget.h"
+#include "infowidget.h"
 #include <QDoubleValidator>
 #include <QIntValidator>
 
@@ -21,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Установка заголовка окна
     setWindowTitle("Калькулятор цементувания обсадних колон");
+    ui->calculateButton->setEnabled(false);
+    ui->calculateButton_2->setEnabled(false);
+    ui->calculateButton_3->setEnabled(false);
 
     //Подсказки на кнопки
     ui->calculateD1Button->setToolTip("Розрахувати діаметр колони");
@@ -43,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->calculateTButton_4->setToolTip("Розрахувати товщину стінки колони");
     ui->calculateTButton_5->setToolTip("Розрахувати товщину стінки колони");
     ui->calculateTButton_6->setToolTip("Розрахувати товщину стінки колони");
+
+    ui->resultsTextEdit->setReadOnly(true);  // Запрещаем ввод
 
     connect(ui->About, &QAction::triggered, this, &MainWindow::about);
     connect(ui->calculateD1Button, &QPushButton::clicked, this, &MainWindow::on_calculateD1Button_clicked);
@@ -109,48 +115,50 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->cementHeightLineEdit, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
     connect(ui->cavernosityCoeffLineEdit, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
 
-    connect(ui->depthLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wellDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->columnDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->innerDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wallThicknessLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cementHeightLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cavernosityCoeffLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
+    connect(ui->depthLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->wellDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->columnDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->innerDiameterLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->wallThicknessLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->cementHeightLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->cavernosityCoeffLineEdit_2, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
 
-    connect(ui->depthLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wellDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->columnDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->innerDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wallThicknessLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cementHeightLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cavernosityCoeffLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
+    connect(ui->depthLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->wellDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->columnDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->innerDiameterLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->wallThicknessLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->cementHeightLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
+    connect(ui->cavernosityCoeffLineEdit_3, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_2State);
 
-    connect(ui->depthLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wellDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->columnDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->innerDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wallThicknessLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cementHeightLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cavernosityCoeffLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
+    connect(ui->depthLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wellDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->columnDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->innerDiameterLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wallThicknessLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cementHeightLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cavernosityCoeffLineEdit_4, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
 
-    connect(ui->depthLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wellDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->columnDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->innerDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wallThicknessLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cementHeightLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cavernosityCoeffLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
+    connect(ui->depthLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wellDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->columnDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->innerDiameterLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wallThicknessLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cementHeightLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cavernosityCoeffLineEdit_5, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
 
-    connect(ui->depthLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wellDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->columnDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->innerDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->wallThicknessLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cementHeightLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
-    connect(ui->cavernosityCoeffLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButtonState);
+    connect(ui->depthLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wellDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->columnDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->innerDiameterLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->wallThicknessLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cementHeightLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
+    connect(ui->cavernosityCoeffLineEdit_6, &QLineEdit::textChanged, this, &MainWindow::updateCalculateButton_3State);
 
     // Обновляем состояние кнопки при запуске
     updateCalculateButtonState();
+    updateCalculateButton_2State();
+    updateCalculateButton_3State();
 
 
     // Создание виджетов для расчётов
@@ -495,31 +503,31 @@ void MainWindow::calculateResults() {
 
     // Проверка входных данных
     if (D <= 0 || d1 <= 0 || d2 <= 0) {
-        ui->errorLabel->setText("Ошибка: все размеры должны быть положительными числами.");
+        ui->errorLabel->setText("Помилка: всі розміри повинні бути додатними числами.");
         return;
     }
     if (d1 <= d2) {
-        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
+        ui->errorLabel->setText("Помилка: внутрішній діаметр повинен бути меншим за зовнішній діаметр.");
         return;
     }
     if (d1 >= D) {
-        ui->errorLabel->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Помилка: зовнішній діаметр повинен бути меншим за діаметр свердловини.");
         return;
     }
     if (d2 >= D) {
-        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
+        ui->errorLabel->setText("Помилка: внутрішній діаметр повинен бути менше діаметра свердловини.");
         return;
     }
     if (H <= 0 || h < 0 || K <= 0 || t < 0) {
-        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Помилка: перевірте правильність даних.");
         return;
     }
     if (t < 0 && !tText.isEmpty()) {
-        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
+        ui->errorLabel->setText("Помилка: перевірте внесені значення.");
         return;
     }
     if (h > H) {
-        ui->errorLabel->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
+        ui->errorLabel->setText("Помилка: висота цементного стакана не може бути більшою за глибину.");
         return;
     }
 
@@ -544,168 +552,353 @@ void MainWindow::calculateResults() {
 
     // Вывод результатов
     ui->resultsTextEdit->setText(QString(
-                                     "Объем тампонажного раствора: %1 м³\n"
-                                     "Объем промывочной жидкости: %2 м³\n"
-                                     "Необходимое количество цемента: %3 т\n"
-                                     "Необходимое количество воды: %4 м³")
+                                     "Об'єм тампонажного розчину : %1 м³\n"
+                                     "Об'єм промивної рідини : %2 м³\n"
+                                     "Необхідна кількість цементу : %3 т\n"
+                                     "Необхідна кількість води : %4 м³\n\n")
                                      .arg(Vцр + Vпр, 0, 'f', 4)
                                      .arg(Vпр, 0, 'f', 4)
                                      .arg(Qц, 0, 'f', 4)
                                      .arg(Vв, 0, 'f', 4));
 }
 
+void MainWindow::calculateResults_3() {
+    // Читання даних з форми для першої колони
+    double H1 = ui->depthLineEdit_4->text().toDouble();             // Глибина
+    double D1 = ui->wellDiameterLineEdit_4->text().toDouble();      // Діаметр свердловини
+    double d1_1 = ui->columnDiameterLineEdit_4->text().toDouble();  // Зовнішній діаметр першої колони
+    double d2_1 = ui->innerDiameterLineEdit_4->text().toDouble();   // Внутрішній діаметр першої колони
+    QString tText1 = ui->wallThicknessLineEdit_4->text();            // Товщина стінки першої колони
+    double t1 = tText1.isEmpty() ? 0 : tText1.toDouble();          // Якщо порожнє, присвоюємо 0
+    double h1 = ui->cementHeightLineEdit_4->text().toDouble();       // Висота цементації першої колони
+    double K1 = ui->cavernosityCoeffLineEdit_4->text().toDouble();  // Коэффициент кавернозності першої колони
 
-void MainWindow::calculateResults_3()
-{
-    // Чтение данных с формы
-    double H = ui->depthLineEdit->text().toDouble();             // Глубина
-    double D = ui->wellDiameterLineEdit->text().toDouble();      // Диаметр скважины
-    double d1 = ui->columnDiameterLineEdit->text().toDouble();   // Внешний диаметр колонны
-    double d2 = ui->innerDiameterLineEdit->text().toDouble();    // Внутренний диаметр колонны
-    // Чтение значения для толщины стенки колонны (необязательное поле)
-    QString tText = ui->wallThicknessLineEdit->text();  // Получаем текст из поля ввода
-    double t = tText.isEmpty() ? 0 : tText.toDouble();  // Если поле пустое, присваиваем 0, иначе преобразуем в число
-    double h = ui->cementHeightLineEdit->text().toDouble();      // Высота цементации
-    double K = ui->cavernosityCoeffLineEdit->text().toDouble();  // Коэффициент кавернозности
+    // Читання даних з форми для другої колони
+    double H2 = ui->depthLineEdit_5->text().toDouble();             // Глибина
+    double D2 = ui->wellDiameterLineEdit_5->text().toDouble();      // Діаметр свердловини
+    double d1_2 = ui->columnDiameterLineEdit_5->text().toDouble();  // Зовнішній діаметр другої колони
+    double d2_2 = ui->innerDiameterLineEdit_5->text().toDouble();   // Внутрішній діаметр другої колони
+    QString tText2 = ui->wallThicknessLineEdit_5->text();            // Товщина стінки другої колони
+    double t2 = tText2.isEmpty() ? 0 : tText2.toDouble();          // Якщо порожнє, присвоюємо 0
+    double h2 = ui->cementHeightLineEdit_5->text().toDouble();       // Висота цементації другої колони
+    double K2 = ui->cavernosityCoeffLineEdit_5->text().toDouble();  // Коэффициент кавернозності другої колони
 
-    // Проверка входных данных
-    // Проверяем логическую последовательность диаметров
-    if (D <= 0 || d1 <= 0 || d2 <= 0) {
-        ui->errorLabel->setText("Ошибка: все размеры должны быть положительными числами.");
+    // Читання даних з форми для третьої колони
+    double H3 = ui->depthLineEdit_6->text().toDouble();             // Глибина
+    double D3 = ui->wellDiameterLineEdit_6->text().toDouble();      // Діаметр свердловини
+    double d1_3 = ui->columnDiameterLineEdit_6->text().toDouble();  // Зовнішній діаметр третьої колони
+    double d2_3 = ui->innerDiameterLineEdit_6->text().toDouble();   // Внутрішній діаметр третьої колони
+    QString tText3 = ui->wallThicknessLineEdit_6->text();            // Товщина стінки третьої колони
+    double t3 = tText3.isEmpty() ? 0 : tText3.toDouble();          // Якщо порожнє, присвоюємо 0
+    double h3 = ui->cementHeightLineEdit_6->text().toDouble();       // Висота цементації третьої колони
+    double K3 = ui->cavernosityCoeffLineEdit_6->text().toDouble();  // Коэффициент кавернозності третьої колони
+
+    // Перевірка вхідних даних для першої колони
+    if (D1 <= 0 || d1_1 <= 0 || d2_1 <= 0) {
+        ui->errorLabel->setText("Помилка: всі розміри першої колони повинні бути додатними числами.");
         return;
     }
-    if (d1 <= d2) {
-        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше внешнего диаметра.");
+    if (d1_1 <= d2_1) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр першої колони повинен бути меншим за зовнішній діаметр.");
         return;
     }
-    if (d1 >= D) {
-        ui->errorLabel->setText("Ошибка: внешний диаметр колонны должен быть меньше диаметра скважины.");
+    if (d1_1 >= D1) {
+        ui->errorLabel->setText("Помилка: зовнішній діаметр першої колони повинен бути меншим за діаметр свердловини.");
         return;
     }
-    if (d2 >= D) {
-        ui->errorLabel->setText("Ошибка: внутренний диаметр колонны должен быть меньше диаметра скважины.");
+    if (d2_1 >= D1) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр першої колони повинен бути меншим за діаметр свердловини.");
         return;
     }
-    if (H <= 0 || h < 0 || K <= 0 || t < 0) {
-        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
+    if (H1 <= 0 || h1 < 0 || K1 <= 0 || t1 < 0) {
+        ui->errorLabel->setText("Помилка: перевірте введені значення для першої колони.");
         return;
     }
-    // Проверка на отрицательную толщину только если поле не пустое
-    if (t < 0 && !tText.isEmpty()) {
-        ui->errorLabel->setText("Ошибка: проверьте введённые значения.");
-        return;
-    }
-    // Проверка, что высота цементного стакана не может быть больше глубины
-    if (h > H) {
-        ui->errorLabel->setText("Ошибка: высота цементного стакана не может быть больше глубины спуска.");
+    if (h1 > H1) {
+        ui->errorLabel->setText("Помилка: висота цементного стакана першої колони не може бути більшою за глибину.");
         return;
     }
 
-    // Расчёт объёмов
-    // Расчёт объёма тампонажного раствора с учетом толщины стенки колонны
-    double Vцр = 0.785 * (D * D - d1 * d1) * H * K + 0.785 * d2 * d2 * h;  // Объём тампонажного раствора
-    // Дополнительный расчет с t (если нужно)
-    if (t > 0) {
-        // Здесь можно добавить код для учета t в других расчетах
+    // Перевірка вхідних даних для другої колони
+    if (D2 <= 0 || d1_2 <= 0 || d2_2 <= 0) {
+        ui->errorLabel->setText("Помилка: всі розміри другої колони повинні бути додатними числами.");
+        return;
     }
-    double Vпр = (H > h) ? (0.785 * d2 * d2 * (H - h)) : 0;                // Объём промывочной жидкости
+    if (d1_2 <= d2_2) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр другої колони повинен бути меншим за зовнішній діаметр.");
+        return;
+    }
+    if (d1_2 >= D2) {
+        ui->errorLabel->setText("Помилка: зовнішній діаметр другої колони повинен бути меншим за діаметр свердловини.");
+        return;
+    }
+    if (d2_2 >= D2) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр другої колони повинен бути меншим за діаметр свердловини.");
+        return;
+    }
+    if (H2 <= 0 || h2 < 0 || K2 <= 0 || t2 < 0) {
+        ui->errorLabel->setText("Помилка: перевірте введені значення для другої колони.");
+        return;
+    }
+    if (h2 > H2) {
+        ui->errorLabel->setText("Помилка: висота цементного стакана другої колони не може бути більшою за глибину.");
+        return;
+    }
+
+    // Перевірка вхідних даних для третьої колони
+    if (D3 <= 0 || d1_3 <= 0 || d2_3 <= 0) {
+        ui->errorLabel->setText("Помилка: всі розміри третьої колони повинні бути додатними числами.");
+        return;
+    }
+    if (d1_3 <= d2_3) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр третьої колони повинен бути меншим за зовнішній діаметр.");
+        return;
+    }
+    if (d1_3 >= D3) {
+        ui->errorLabel->setText("Помилка: зовнішній діаметр третьої колони повинен бути меншим за діаметр свердловини.");
+        return;
+    }
+    if (d2_3 >= D3) {
+        ui->errorLabel->setText("Помилка: внутрішній діаметр третьої колони повинен бути меншим за діаметр свердловини.");
+        return;
+    }
+    if (H3 <= 0 || h3 < 0 || K3 <= 0 || t3 < 0) {
+        ui->errorLabel->setText("Помилка: перевірте введені значення для третьої колони.");
+        return;
+    }
+    if (h3 > H3) {
+        ui->errorLabel->setText("Помилка: висота цементного стакана третьої колони не може бути більшою за глибину.");
+        return;
+    }
+
+    // Розрахунок об'ємів для першої колони
+    double Vцр1 = 0.785 * (pow(D1, 2) - pow(d1_1, 2)) * H1 * K1 + 0.785 * pow(d2_1, 2) * h1;  // Об'єм тампонажного розчину для першої колони
+    double Vпр1 = (H1 > h1) ? (0.785 * pow(d2_1, 2) * (H1 - h1)) : 0;  // Об'єм промивної рідини для першої колони
+
+    // Розрахунок об'ємів для другої колони
+    double Vцр2 = 0.785 * (pow(D2, 2) - pow(d1_2, 2)) * H2 * K2 + 0.785 * pow(d2_2, 2) * h2;  // Об'єм тампонажного розчину для другої колони
+    double Vпр2 = (H2 > h2) ? (0.785 * pow(d2_2, 2) * (H2 - h2)) : 0;  // Об'єм промивної рідини для другої колони
+
+    // Розрахунок об'ємів для третьої колони
+    double Vцр3 = 0.785 * (pow(D3, 2) - pow(d1_3, 2)) * H3 * K3 + 0.785 * pow(d2_3, 2) * h3;  // Об'єм тампонажного розчину для третьої колони
+    double Vпр3 = (H3 > h3) ? (0.785 * pow(d2_3, 2) * (H3 - h3)) : 0;  // Об'єм промивної рідини для третьої колони
+
+    // Коригування від'ємних значень
+    if (Vцр1 < 0) Vцр1 = 0;
+    if (Vпр1 < 0) Vпр1 = 0;
+    if (Vцр2 < 0) Vцр2 = 0;
+    if (Vпр2 < 0) Vпр2 = 0;
+    if (Vцр3 < 0) Vцр3 = 0;
+    if (Vпр3 < 0) Vпр3 = 0;
+
+    // Розрахунок цементу та води
+    double Qц1 = Vцр1 * 1.23 * 1.05;  // Необхідна кількість цементу для першої колони
+    double Vв1 = Vцр1 * 0.6 * 1.5;    // Необхідна кількість води для першої колони
+    double Qц2 = Vцр2 * 1.23 * 1.05;  // Необхідна кількість цементу для другої колони
+    double Vв2 = Vцр2 * 0.6 * 1.5;    // Необхідна кількість води для другої колони
+    double Qц3 = Vцр3 * 1.23 * 1.05;  // Необхідна кількість цементу для третьої колони
+    double Vв3 = Vцр3 * 0.6 * 1.5;    // Необхідна кількість води для третьої колони
+
+    ui->resultsTextEdit_3->setText(QString(
+                                         "Об'єм тампонажного розчину для першої колони: %1 м³\n"
+                                         "Об'єм промивної рідини для першої колони: %2 м³\n"
+                                         "Необхідна кількість цементу для першої колони: %3 т\n"
+                                         "Необхідна кількість води для першої колони: %4 м³\n\n"
+                                         "Об'єм тампонажного розчину для другої колони: %5 м³\n"
+                                         "Об'єм промивної рідини для другої колони: %6 м³\n"
+                                         "Необхідна кількість цементу для другої колони: %7 т\n"
+                                         "Необхідна кількість води для другої колони: %8 м³\n\n"
+                                         "Об'єм тампонажного розчину для третьої колони: %9 м³\n"
+                                         "Об'єм промивної рідини для третьої колони: %10 м³\n"
+                                         "Необхідна кількість цементу для третьої колони: %11 т\n"
+                                         "Необхідна кількість води для третьої колони: %12 м³")
+                                         .arg(Vцр1 + Vпр1, 0, 'f', 4)
+                                         .arg(Vпр1, 0, 'f', 4)
+                                         .arg(Qц1, 0, 'f', 4)
+                                         .arg(Vв1, 0, 'f', 4)
+                                         .arg(Vцр2 + Vпр2, 0, 'f', 4)
+                                         .arg(Vпр2, 0, 'f', 4)
+                                         .arg(Qц2, 0, 'f', 4)
+                                         .arg(Vв2, 0, 'f', 4)
+                                         .arg(Vцр3 + Vпр3, 0, 'f', 4)
+                                         .arg(Vпр3, 0, 'f', 4)
+                                         .arg(Qц3, 0, 'f', 4)
+                                         .arg(Vв3, 0, 'f', 4));
+}
+
+void MainWindow::calculateResults_2() {
+    // Чтение данных с формы для первой колонки
+    double H1 = ui->depthLineEdit_2->text().toDouble();             // Глубина
+    double D1 = ui->wellDiameterLineEdit_2->text().toDouble();      // Диаметр скважины
+    double d1_1 = ui->columnDiameterLineEdit_2->text().toDouble();  // Внешний диаметр первой колонны
+    double d2_1 = ui->innerDiameterLineEdit_2->text().toDouble();   // Внутренний диаметр первой колонны
+    QString tText1 = ui->wallThicknessLineEdit_2->text();            // Толщина стенки первой колонны
+    double t1 = tText1.isEmpty() ? 0 : tText1.toDouble();          // Если пустое, присваиваем 0
+    double h1 = ui->cementHeightLineEdit_2->text().toDouble();       // Высота цементации первой колонны
+    double K1 = ui->cavernosityCoeffLineEdit_2->text().toDouble();  // Коэффициент кавернозности первой колонны
+
+    // Чтение данных с формы для второй колонки
+    double H2 = ui->depthLineEdit_3->text().toDouble();             // Глубина
+    double D2 = ui->wellDiameterLineEdit_3->text().toDouble();      // Диаметр скважины
+    double d1_2 = ui->columnDiameterLineEdit_3->text().toDouble();  // Внешний диаметр второй колонны
+    double d2_2 = ui->innerDiameterLineEdit_3->text().toDouble();   // Внутренний диаметр второй колонны
+    QString tText2 = ui->wallThicknessLineEdit_3->text();            // Толщина стенки второй колонны
+    double t2 = tText2.isEmpty() ? 0 : tText2.toDouble();          // Если пустое, присваиваем 0
+    double h2 = ui->cementHeightLineEdit_3->text().toDouble();       // Высота цементации второй колонны
+    double K2 = ui->cavernosityCoeffLineEdit_3->text().toDouble();  // Коэффициент кавернозности второй колонны
+
+    // Проверка входных данных для первой колонки
+    if (D1 <= 0 || d1_1 <= 0 || d2_1 <= 0) {
+        ui->errorLabel->setText("Ошибка: все размеры первой колонны должны быть положительными числами.");
+        return;
+    }
+    if (d1_1 <= d2_1) {
+        ui->errorLabel->setText("Ошибка: внутренний диаметр первой колонны должен быть меньше внешнего диаметра.");
+        return;
+    }
+    if (d1_1 >= D1) {
+        ui->errorLabel->setText("Ошибка: внешний диаметр первой колонны должен быть меньше диаметра скважины.");
+        return;
+    }
+    if (d2_1 >= D1) {
+        ui->errorLabel->setText("Ошибка: внутренний диаметр первой колонны должен быть меньше диаметра скважины.");
+        return;
+    }
+    if (H1 <= 0 || h1 < 0 || K1 <= 0 || t1 < 0) {
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения для первой колонны.");
+        return;
+    }
+    if (h1 > H1) {
+        ui->errorLabel->setText("Ошибка: высота цементного стакана первой колонны не может быть больше глубины.");
+        return;
+    }
+
+    // Проверка входных данных для второй колонки
+    if (D2 <= 0 || d1_2 <= 0 || d2_2 <= 0) {
+        ui->errorLabel->setText("Ошибка: все размеры второй колонны должны быть положительными числами.");
+        return;
+    }
+    if (d1_2 <= d2_2) {
+        ui->errorLabel->setText("Ошибка: внутренний диаметр второй колонны должен быть меньше внешнего диаметра.");
+        return;
+    }
+    if (d1_2 >= D2) {
+        ui->errorLabel->setText("Ошибка: внешний диаметр второй колонны должен быть меньше диаметра скважины.");
+        return;
+    }
+    if (d2_2 >= D2) {
+        ui->errorLabel->setText("Ошибка: внутренний диаметр второй колонны должен быть меньше диаметра скважины.");
+        return;
+    }
+    if (H2 <= 0 || h2 < 0 || K2 <= 0 || t2 < 0) {
+        ui->errorLabel->setText("Ошибка: проверьте введённые значения для второй колонны.");
+        return;
+    }
+    if (h2 > H2) {
+        ui->errorLabel->setText("Ошибка: высота цементного стакана второй колонны не может быть больше глубины.");
+        return;
+    }
+
+    // Расчёт объёмов для первой колонны
+    double Vцр1 = 0.785 * (pow(D1, 2) - pow(d1_1, 2)) * H1 * K1 + 0.785 * pow(d2_1, 2) * h1;  // Объём тампонажного раствора для первой колонны
+    double Vпр1 = (H1 > h1) ? (0.785 * pow(d2_1, 2) * (H1 - h1)) : 0;  // Объём промывочной жидкости для первой колонны
+
+    // Расчёт объёмов для второй колонны
+    double Vцр2 = 0.785 * (pow(D2, 2) - pow(d1_2, 2)) * H2 * K2 + 0.785 * pow(d2_2, 2) * h2;  // Объём тампонажного раствора для второй колонны
+    double Vпр2 = (H2 > h2) ? (0.785 * pow(d2_2, 2) * (H2 - h2)) : 0;  // Объём промывочной жидкости для второй колонны
 
     // Корректировка отрицательных значений
-    if (Vцр < 0) Vцр = 0;
-    if (Vпр < 0) Vпр = 0;
+    if (Vцр1 < 0) Vцр1 = 0;
+    if (Vпр1 < 0) Vпр1 = 0;
+    if (Vцр2 < 0) Vцр2 = 0;
+    if (Vпр2 < 0) Vпр2 = 0;
 
     // Расчёт цемента и воды
-    double Qц = Vцр * 1.23 * 1.05;  // Необходимое количество цемента
-    double Vв = Vцр * 0.6 * 1.5;    // Необходимое количество воды
+    double Qц1 = Vцр1 * 1.23 * 1.05;  // Необходимое количество цемента для первой колонны
+    double Vв1 = Vцр1 * 0.6 * 1.5;    // Необходимое количество воды для первой колонны
+    double Qц2 = Vцр2 * 1.23 * 1.05;  // Необходимое количество цемента для второй колонны
+    double Vв2 = Vцр2 * 0.6 * 1.5;    // Необходимое количество воды для второй колонны
 
     // Вывод результатов
     ui->resultsTextEdit->setText(QString(
-                                     "Объем тампонажного раствора: %1 м³\n"
-                                     "Объем промывочной жидкости: %2 м³\n"
-                                     "Необходимое количество цемента: %3 т\n"
-                                     "Необходимое количество воды: %4 м³")
-                                     .arg(Vцр + Vпр, 0, 'f', 4)
-                                     .arg(Vпр, 0, 'f', 4)
-                                     .arg(Qц, 0, 'f', 4)
-                                     .arg(Vв, 0, 'f', 4));
+                                     "Объем тампонажного раствора для первой колонны: %1 м³\n"
+                                     "Объем промывочной жидкости для первой колонны: %2 м³\n"
+                                     "Необходимое количество цемента для первой колонны: %3 т\n"
+                                     "Необходимое количество воды для первой колонны: %4 м³\n\n"
+                                     "Объем тампонажного раствора для второй колонны: %5 м³\n"
+                                     "Объем промывочной жидкости для второй колонны: %6 м³\n"
+                                     "Необходимое количество цемента для второй колонны: %7 т\n"
+                                     "Необходимое количество воды для второй колонны: %8 м³")
+                                     .arg(Vцр1 + Vпр1, 0, 'f', 4)
+                                     .arg(Vпр1, 0, 'f', 4)
+                                     .arg(Qц1, 0, 'f', 4)
+                                     .arg(Vв1, 0, 'f', 4)
+                                     .arg(Vцр2 + Vпр2, 0, 'f', 4)
+                                     .arg(Vпр2, 0, 'f', 4)
+                                     .arg(Qц2, 0, 'f', 4)
+                                     .arg(Vв2, 0, 'f', 4));
 }
 
-void MainWindow::calculateResults_2()
+void MainWindow::updateCalculateButton_2State()
 {
-    struct ColumnData {
-        double H;   // Глибина
-        double D;   // Діаметр свердловини
-        double d1;  // Зовнішній діаметр колони
-        double t;   // Товщина стінки
-        double d2;  // Внутрішній діаметр колони
-        double h;   // Висота цементного стакана
-        double K;   // Коефіцієнт кавернозності
-    };
+    qDebug() << "Проверка полей...";
 
-    // Вхідні дані для першої колони
-    ColumnData column1 = {
-        ui->depthLineEdit_2->text().toDouble(),
-        ui->wellDiameterLineEdit_2->text().toDouble(),
-        ui->columnDiameterLineEdit_2->text().toDouble(),
-        ui->wallThicknessLineEdit_2->text().toDouble(),
-        ui->innerDiameterLineEdit_2->text().toDouble(),
-        ui->cementHeightLineEdit_2->text().toDouble(),
-        ui->cavernosityCoeffLineEdit_2->text().toDouble()
-    };
+    bool allFieldsValid = !ui->depthLineEdit_2->text().isEmpty() &&
+                          !ui->wellDiameterLineEdit_2->text().isEmpty() &&
+                          !ui->columnDiameterLineEdit_2->text().isEmpty() &&
+                          !ui->innerDiameterLineEdit_2->text().isEmpty() &&
+                          !ui->cementHeightLineEdit_2->text().isEmpty() &&
+                          !ui->cavernosityCoeffLineEdit_2->text().isEmpty() &&
+                          !ui->depthLineEdit_3->text().isEmpty() &&
+                          !ui->wellDiameterLineEdit_3->text().isEmpty() &&
+                          !ui->columnDiameterLineEdit_3->text().isEmpty() &&
+                          !ui->innerDiameterLineEdit_3->text().isEmpty() &&
+                          !ui->cementHeightLineEdit_3->text().isEmpty() &&
+                          !ui->cavernosityCoeffLineEdit_3->text().isEmpty();
 
-    // Вхідні дані для другої колони
-    ColumnData column2 = {
-        ui->depthLineEdit_3->text().toDouble(),
-        ui->wellDiameterLineEdit_3->text().toDouble(),
-        ui->columnDiameterLineEdit_3->text().toDouble(),
-        ui->wallThicknessLineEdit_3->text().toDouble(),
-        ui->innerDiameterLineEdit_3->text().toDouble(),
-        ui->cementHeightLineEdit_3->text().toDouble(),
-        ui->cavernosityCoeffLineEdit_3->text().toDouble()
-    };
+    qDebug() << "Все поля заполнены?" << allFieldsValid;
 
-    auto calculateVolume = [](const ColumnData& col) {
-        if (col.D <= 0 || col.d1 <= 0 || col.d2 <= 0 || col.t < 0 || col.H <= 0 || col.h < 0 || col.K <= 0) {
-            return std::make_tuple(0.0, 0.0, 0.0, 0.0); // Невірні вхідні дані
-        }
-        if (col.d1 <= col.d2 || col.d1 >= col.D || col.d2 >= col.D || col.h > col.H) {
-            return std::make_tuple(0.0, 0.0, 0.0, 0.0); // Невірні розміри
-        }
-
-        double Vцр = 0.785 * (pow(col.D, 2) - pow(col.d1, 2)) * col.H * col.K + 0.785 * pow(col.d2, 2) * col.h;
-        double Vпр = 0.785 * pow(col.d2, 2) * col.H;
-        double Qц = Vцр * 1.23 * 1.05; // Необхідна кількість цементу
-        double Vв = Vцр * 0.6 * 1.5;   // Необхідна кількість води
-
-        return std::make_tuple(Vцр, Vпр, Qц, Vв);
-    };
-
-    auto [Vцр1, Vпр1, Qц1, Vв1] = calculateVolume(column1);
-    auto [Vцр2, Vпр2, Qц2, Vв2] = calculateVolume(column2);
-
-    double totalCement = Qц1 + Qц2;
-    double totalWater = Vв1 + Vв2;
-
-    // Виведення результатів
-    ui->resultsTextEdit_2->setText(QString(
-                                       "Перша колона:\n"
-                                       "Об'єм тампонажного розчину: %1 м³\n"
-                                       "Об'єм промивної рідини: %2 м³\n"
-                                       "Необхідна кількість цементу: %3 т\n"
-                                       "Необхідна кількість води: %4 м³\n\n"
-                                       "Друга колона:\n"
-                                       "Об'єм тампонажного розчину: %5 м³\n"
-                                       "Об'єм промивної рідини: %6 м³\n"
-                                       "Необхідна кількість цементу: %7 т\n"
-                                       "Необхідна кількість води: %8 м³\n\n"
-                                       "Загальні витрати:\n"
-                                       "Цемент: %9 т\n"
-                                       "Вода: %10 м³")
-                                       .arg(Vцр1, 0, 'f', 4).arg(Vпр1, 0, 'f', 4).arg(Qц1, 0, 'f', 4).arg(Vв1, 0, 'f', 4)
-                                       .arg(Vцр2, 0, 'f', 4).arg(Vпр2, 0, 'f', 4).arg(Qц2, 0, 'f', 4).arg(Vв2, 0, 'f', 4)
-                                       .arg(totalCement, 0, 'f', 4).arg(totalWater, 0, 'f', 4));
+    ui->calculateButton_2->setEnabled(allFieldsValid);
+    if (!allFieldsValid) {
+        ui->calculateButton_2->setToolTip("Заповніть всі поля для розрахунку");
+    } else {
+        ui->calculateButton_2->setToolTip(""); // Очищаем подсказку
+    }
 }
 
+void MainWindow::updateCalculateButton_3State()
+{
+    qDebug() << "Проверка полей...";
+
+    bool allFieldsValid = !ui->depthLineEdit_4->text().isEmpty() &&
+                          !ui->wellDiameterLineEdit_4->text().isEmpty() &&
+                          !ui->columnDiameterLineEdit_4->text().isEmpty() &&
+                          !ui->innerDiameterLineEdit_4->text().isEmpty() &&
+                          !ui->cementHeightLineEdit_4->text().isEmpty() &&
+                          !ui->cavernosityCoeffLineEdit_4->text().isEmpty() &&
+                          !ui->depthLineEdit_5->text().isEmpty() &&
+                          !ui->wellDiameterLineEdit_5->text().isEmpty() &&
+                          !ui->columnDiameterLineEdit_5->text().isEmpty() &&
+                          !ui->innerDiameterLineEdit_5->text().isEmpty() &&
+                          !ui->cementHeightLineEdit_5->text().isEmpty() &&
+                          !ui->cavernosityCoeffLineEdit_5->text().isEmpty() &&
+                          !ui->depthLineEdit_6->text().isEmpty() &&
+                          !ui->wellDiameterLineEdit_6->text().isEmpty() &&
+                          !ui->columnDiameterLineEdit_6->text().isEmpty() &&
+                          !ui->innerDiameterLineEdit_6->text().isEmpty() &&
+                          !ui->cementHeightLineEdit_6->text().isEmpty() &&
+                          !ui->cavernosityCoeffLineEdit_6->text().isEmpty();
+
+    qDebug() << "Все поля заполнены?" << allFieldsValid;
+
+    ui->calculateButton_3->setEnabled(allFieldsValid);
+
+    if (!allFieldsValid) {
+        ui->calculateButton_3->setToolTip("Заповніть всі поля для розрахунку");
+    } else {
+        ui->calculateButton_3->setToolTip(""); // Очищаем подсказку
+    }
+}
 
 void MainWindow::updateCalculateButtonState()
 {
@@ -717,7 +910,15 @@ void MainWindow::updateCalculateButtonState()
                           !ui->cementHeightLineEdit->text().isEmpty() &&
                           !ui->cavernosityCoeffLineEdit->text().isEmpty();
 
+    qDebug() << "Все поля заполнены?" << allFieldsValid;
+
     ui->calculateButton->setEnabled(allFieldsValid);
+
+    if (!allFieldsValid) {
+        ui->calculateButton->setToolTip("Заповніть всі поля для розрахунку");
+    } else {
+        ui->calculateButton->setToolTip(""); // Очищаем подсказку
+    }
 }
 
 void MainWindow::on_calculateButton_clicked()
@@ -776,7 +977,6 @@ void MainWindow::clearInputs()
     ui->resultsTextEdit_2->clear();
     ui->resultsTextEdit_3->clear();
 }
-
 
 void MainWindow::on_calculateD1Button_clicked()
 {
@@ -885,7 +1085,6 @@ void MainWindow::on_calculateD1Button_6_clicked()
     d1 = d2 + 2 * t;
     ui->columnDiameterLineEdit_6->setText(QString::number(d1, 'f', 3));  // Выводим результат в поле d1
 }
-
 
 void MainWindow::on_calculateD2Button_clicked()
 {
@@ -1092,7 +1291,6 @@ void MainWindow::on_calculateTButton_6_clicked()
     ui->wallThicknessLineEdit_6->setText(QString::number(t, 'f', 3));  // Выводим результат в поле t
 }
 
-
 void MainWindow::on_clearButton_clicked()
 {
     clearInputs();  // Очистить все поля
@@ -1113,7 +1311,6 @@ void MainWindow::on_calculateButton_2_clicked()
     calculateResults_2();
 }
 
-
 void MainWindow::on_calculateButton_3_clicked()
 {
 
@@ -1131,4 +1328,31 @@ void MainWindow::updateErrorLabel()
         // Если нет ошибок, очищаем errorLabel
         ui->errorLabel->clear();
     }
+}
+
+void MainWindow::checkFields() {
+    bool allFilled = !ui->depthLineEdit->text().isEmpty() &&
+                     !ui->wellDiameterLineEdit->text().isEmpty() &&
+                     !ui->columnDiameterLineEdit->text().isEmpty() &&
+                     !ui->innerDiameterLineEdit->text().isEmpty() &&
+                     !ui->wallThicknessLineEdit->text().isEmpty() &&
+                     !ui->cementHeightLineEdit->text().isEmpty() &&
+                     !ui->cavernosityCoeffLineEdit->text().isEmpty();
+
+    ui->calculateButton->setEnabled(allFilled);
+}
+
+void MainWindow::showErrorWithTimeout(const QString &errorMessage) {
+    ui->errorLabel->setText(errorMessage);
+
+    // Запускаем таймер на очистку
+    QTimer::singleShot(3000, this, &MainWindow::clearErrorLabel);
+}
+
+void MainWindow::clearErrorLabel() {
+    qDebug() << "Текущее значение errorLabel перед очисткой:" << ui->errorLabel->text();
+    ui->errorLabel->clear();
+    ui->errorLabel->setVisible(false); // Скрываем
+    ui->errorLabel->setVisible(true);  // Показываем обратно
+    qDebug() << "Текущее значение errorLabel после очистки:" << ui->errorLabel->text();
 }

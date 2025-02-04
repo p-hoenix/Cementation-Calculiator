@@ -4,8 +4,8 @@
 #include <QMainWindow>
 #include <QWidget>
 #include <QTextEdit>
+#include <QTimer>
 #include "infowidget.h"
-#include "inputhelper.h" // Подключаем класс InputHelper
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,6 +22,8 @@ public slots:
     void showDetailedInfo();
 
 private slots:
+
+    void checkFields();
 
     void setupValidators();
 
@@ -94,6 +96,13 @@ private slots:
     void on_clearButton_2_clicked();
 
     void on_clearButton_3_clicked();
+
+    void updateCalculateButton_2State();
+
+    void updateCalculateButton_3State();
+
+    void showErrorWithTimeout(const QString &errorMessage);
+    void clearErrorLabel();
 
 private:
     Ui::MainWindow *ui;
