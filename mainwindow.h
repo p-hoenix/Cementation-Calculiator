@@ -101,8 +101,9 @@ private slots:
 
     void updateCalculateButton_3State();
 
-    void showErrorWithTimeout(const QString &errorMessage);
-    void clearErrorLabel();
+protected:
+    void enterEvent(QEnterEvent *event) override;
+
 
 private:
     Ui::MainWindow *ui;

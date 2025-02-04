@@ -1342,17 +1342,13 @@ void MainWindow::checkFields() {
     ui->calculateButton->setEnabled(allFilled);
 }
 
-void MainWindow::showErrorWithTimeout(const QString &errorMessage) {
-    ui->errorLabel->setText(errorMessage);
+void MainWindow::enterEvent(QEnterEvent *event)
+{
+    QMainWindow::enterEvent(event);
 
-    // Запускаем таймер на очистку
-    QTimer::singleShot(3000, this, &MainWindow::clearErrorLabel);
-}
-
-void MainWindow::clearErrorLabel() {
-    qDebug() << "Текущее значение errorLabel перед очисткой:" << ui->errorLabel->text();
-    ui->errorLabel->clear();
-    ui->errorLabel->setVisible(false); // Скрываем
-    ui->errorLabel->setVisible(true);  // Показываем обратно
-    qDebug() << "Текущее значение errorLabel после очистки:" << ui->errorLabel->text();
+    // Проверяем, если кнопка неактивна
+    if (!ui->calculateButton_2->isEnabled()) {
+        ui->errorLabel->setText("");
+        ui->errorLabel->setVisible(true);  // Показываем метку с ошибкой
+    }
 }
