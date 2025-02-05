@@ -25,19 +25,19 @@ public:
     {
         if (InfoWidget->objectName().isEmpty())
             InfoWidget->setObjectName("InfoWidget");
-        InfoWidget->resize(400, 419);
-        InfoWidget->setMaximumSize(QSize(400, 550));
+        InfoWidget->resize(510, 420);
+        InfoWidget->setMaximumSize(QSize(510, 420));
         labelImage = new QLabel(InfoWidget);
         labelImage->setObjectName("labelImage");
-        labelImage->setGeometry(QRect(10, 10, 380, 400));
+        labelImage->setGeometry(QRect(10, 10, 493, 399));
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(labelImage->sizePolicy().hasHeightForWidth());
         labelImage->setSizePolicy(sizePolicy);
-        labelImage->setMinimumSize(QSize(380, 400));
+        labelImage->setMinimumSize(QSize(493, 399));
         labelImage->setMaximumSize(QSize(380, 400));
-        labelImage->setPixmap(QPixmap(QString::fromUtf8(":/images/info")));
+        labelImage->setPixmap(QPixmap(QString::fromUtf8(":/images/images/Info.png")));
         labelImage->setScaledContents(true);
         labelImage->setAlignment(Qt::AlignmentFlag::AlignCenter);
 

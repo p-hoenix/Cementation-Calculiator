@@ -9,12 +9,6 @@ InfoWidget::InfoWidget(QWidget *parent) :
 
     // Загружаем изображение
     QPixmap image(":/images/info.png");
-
-    if (image.isNull()) {
-        qDebug() << "Ошибка: изображение не загружено!";
-    } else {
-        ui->labelImage->setPixmap(image.scaled(ui->labelImage->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    }
 }
 
 InfoWidget::~InfoWidget() {

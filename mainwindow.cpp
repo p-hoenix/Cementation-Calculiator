@@ -19,12 +19,35 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Загружаем настройки
+    loadSettings();
+
     setupValidators();  // Добавляем валидацию
+
     SMenu = menuBar()->addMenu("Налаштування"); // Создаём меню "Налаштування"
     CWR = new QAction("Змінити співвідношення вода/цемент", this);
     connect(CWR, &QAction::triggered, this, &MainWindow::onChangeWCRAction);
     SMenu->addAction(CWR);
     qDebug() << "Connected CWR action!";
+
+
+    // Пункты меню для плотности
+    QAction *densityAction = new QAction("Налаштування щільності", this);
+    connect(densityAction, &QAction::triggered, this, &MainWindow::openDensitySettings);
+    SMenu->addAction(densityAction);
+
+    // Создаем действия для изменения коэффициентов K2 и K3
+    QAction *k2Action = new QAction(tr("Налаштувати коеф. потерь цемента (K2)"), this);
+    QAction *k3Action = new QAction(tr("Налаштувати коеф. потерь води (K3)"), this);
+
+    // Подключаем действия к слотам
+    connect(k2Action, &QAction::triggered, this, &MainWindow::openK2Settings);
+    connect(k3Action, &QAction::triggered, this, &MainWindow::openK3Settings);
+
+    // Добавляем действия в меню
+    SMenu->addAction(k2Action);
+    SMenu->addAction(k3Action);
 
     // Установка заголовка окна
     setWindowTitle("Калькулятор цементувания обсадних колон");
@@ -264,6 +287,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::loadSettings() {
+    QSettings settings("settings.ini", QSettings::IniFormat);
+
+    // Загрузка значений, если они существуют
+    rho_tr = settings.value("Density/solution", 1.2).toDouble();  // Значение по умолчанию 1.2
+    rho_c = settings.value("Density/cement", 1.5).toDouble();     // Значение по умолчанию 1.5
+    rho_w = settings.value("Density/water", 1.0).toDouble();      // Значение по умолчанию 1.0
+}
+
 void MainWindow::showDetailedInfo() {
     if (infoWindow) {
         if (infoWindow->isVisible()) {
@@ -286,7 +318,7 @@ void MainWindow::showDetailedInfo() {
 
 void MainWindow::setupValidators() {
     // Установим валидаторы для полей
-    QIntValidator* intValidator = new QIntValidator(0, 1000000, this);  // Для целых чисел от 0 до 1000000
+    // QIntValidator* intValidator = new QIntValidator(0, 1000000, this);  // Для целых чисел от 0 до 1000000
     QDoubleValidator* doubleValidator = new QDoubleValidator(0, 1000000, 2, this);  // Для чисел с плавающей точкой
 
     // Применяем валидаторы для первой колонки
@@ -524,7 +556,7 @@ void MainWindow::calculateResults() {
         ui->errorLabel->setText("Помилка: внутрішній діаметр повинен бути менше діаметра свердловини.");
         return;
     }
-    if (H <= 0 || h < 0 || K <= 0 || t < 0) {
+    if (H <= 0 || h < 0 || K <= 0 || t < 0 || currentWCR <= 0) {
         ui->errorLabel->setText("Помилка: перевірте правильність даних.");
         return;
     }
@@ -537,34 +569,68 @@ void MainWindow::calculateResults() {
         return;
     }
 
-    // Расчёт объёмов
-    double Vцр = 0.785 * (pow(D, 2) - pow(d1, 2)) * H * K + 0.785 * pow(d2, 2) * h;  // Объём тампонажного раствора
+    // Расчет объема цементного раствора
+    double Vцр = (M_PI / 4.0) * ((pow(D, 2) - pow(d1, 2)) * H + pow(d2, 2) * h);
+    qDebug() << "D:" << D << "d1:" << d1 << "d2:" << d2 << "H:" << H << "h:" << h;
+    qDebug() << "Vцр:" << Vцр;
 
     // Дополнительный расчёт с t (если нужно)
     if (t > 0) {
         // Тут можно учесть t, например, в расчёте объёма цементного раствора или других величин
     }
 
-    // Объём промывочной жидкости (если H > h)
+    // Объем промывочной жидкости (если H > h)
     double Vпр = (H > h) ? (0.785 * pow(d2, 2) * (H - h)) : 0;
 
     // Корректировка отрицательных значений
     if (Vцр < 0) Vцр = 0;
     if (Vпр < 0) Vпр = 0;
 
-    // Расчёт цемента и воды
-    double Qц = Vцр *  1.23 * 1.05;  // Необходимое количество цемента
-    double Vв = Vцр *  (1 - currentWCR) * 2;    // Необходимое количество воды
+    // Расчет массы цемента и воды с учетом коэффициентов потерь и WCR
+
+    double numerator = rho_tr - rho_w;  // Числитель
+    double denominator = rho_c - rho_w;  // Знаменатель
+
+    // Проверка на нулевой знаменатель
+    if (denominator == 0) {
+        qDebug() << "Ошибка: знаменатель равен нулю!";
+        return;
+    }
+
+    double q = (numerator / denominator) * rho_c;  // Расчёт параметра q
+
+    qDebug() << "q value: " << q;
+
+    if (rho_c == rho_w) {
+        qDebug() << "Ошибка: плотность материала и воды не могут быть равными!";
+        return;  // Прерываем выполнение
+    }
+    if (rho_tr <= rho_w) {
+        qDebug() << "Ошибка: rho_tr должно быть больше, чем rho_w!";
+        return;  // Прерываем выполнение, если плотность раствора меньше или равна плотности воды
+    }
+
+    if (rho_tr == rho_c) {
+        qDebug() << "Ошибка: rho_tr не может быть равно rho_c!";
+        return;  // Прерываем выполнение, если плотность раствора равна плотности цемента
+    }
+    if (q < 0) q = 0; // Если q отрицательно, то делаем его 0
+    double G = k2 * q * Vцр; // Масса цемента
+    double Vв = k3 * Vцр / currentWCR; // Объем воды
+
+    // Проверка отрицательных значений
+    if (G < 0) G = 0;
+    if (Vв < 0) Vв = 0;
 
     // Вывод результатов
     ui->resultsTextEdit->setText(QString(
                                      "Об'єм тампонажного розчину Vцр: %1 м³\n"
                                      "Об'єм промивної рідини Vпр: %2 м³\n"
-                                     "Необхідна кількість цементу : %3 т\n"
-                                     "Необхідна кількість води : %4 м³\n\n")
+                                     "Необхідна кількість цементу: %3 т\n"
+                                     "Необхідна кількість води: %4 м³\n\n")
                                      .arg(Vцр + Vпр, 0, 'f', 4)
                                      .arg(Vпр, 0, 'f', 4)
-                                     .arg(Qц, 0, 'f', 4)
+                                     .arg(G, 0, 'f', 4)
                                      .arg(Vв, 0, 'f', 4));
 }
 
@@ -1360,36 +1426,74 @@ void MainWindow::enterEvent(QEnterEvent *event)
 }
 
 void MainWindow::onChangeWCRAction() {
-    // Создаём диалоговое окно
     QDialog dialog(this);
     dialog.setWindowTitle("Вибір співвідношення вода/цемент");
+    dialog.resize(300, 100);
 
-    // Создаём выпадающий список
     QComboBox *comboBox = new QComboBox(&dialog);
     comboBox->addItem("1:1");
     comboBox->addItem("1:2");
     comboBox->addItem("1:3");
     comboBox->addItem("1:4");
-    comboBox->addItem("Інший");  // Пункт для ввода своего значения
+    comboBox->addItem("Інший");
 
-    // Кнопка "ОК"
+    QLineEdit *waterInput = new QLineEdit(&dialog);
+    QLineEdit *cementInput = new QLineEdit(&dialog);
+    QLabel *waterLabel = new QLabel("Вода (л):", &dialog);
+    QLabel *cementLabel = new QLabel("Цемент (кг):", &dialog);
+
+    waterInput->setValidator(new QDoubleValidator(0.1, 1000.0, 2, this));
+    cementInput->setValidator(new QDoubleValidator(0.1, 1000.0, 2, this));
+
+    QWidget *customInputWidget = new QWidget(&dialog);
+    QGridLayout *gridLayout = new QGridLayout;
+    gridLayout->addWidget(waterLabel, 0, 0);
+    gridLayout->addWidget(waterInput, 0, 1);
+    gridLayout->addWidget(cementLabel, 1, 0);
+    gridLayout->addWidget(cementInput, 1, 1);
+    customInputWidget->setLayout(gridLayout);
+    customInputWidget->hide();
+
     QPushButton *okButton = new QPushButton("OK", &dialog);
 
-    // Размещение элементов
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget(comboBox);
+    layout->addWidget(customInputWidget);
     layout->addWidget(okButton);
     dialog.setLayout(layout);
 
-    // Обработчик кнопки "ОК"
+    connect(comboBox, &QComboBox::currentTextChanged, [&](const QString &text) {
+        customInputWidget->setVisible(text == "Інший");
+    });
+
+    connect(waterInput, &QLineEdit::textChanged, [&](const QString &text) {
+        if (!text.isEmpty() && !cementInput->text().isEmpty()) {
+            double water = text.toDouble();
+            double cement = cementInput->text().toDouble();
+            if (cement > 0) {
+                currentWCR = water / cement;
+            }
+        }
+    });
+
+    connect(cementInput, &QLineEdit::textChanged, [&](const QString &text) {
+        if (!text.isEmpty() && !waterInput->text().isEmpty()) {
+            double water = waterInput->text().toDouble();
+            double cement = text.toDouble();
+            if (cement > 0) {
+                currentWCR = water / cement;
+            }
+        }
+    });
+
     connect(okButton, &QPushButton::clicked, [&]() {
         if (comboBox->currentText() == "Інший") {
-            bool ok;
-            double customValue = QInputDialog::getDouble(this, "Введіть значення",
-                                                         "Співвідношення вода/цемент:",
-                                                         1.0, 0.1, 10.0, 2, &ok);
-            if (ok) {
-                currentWCR = customValue;
+            if (!waterInput->text().isEmpty() && !cementInput->text().isEmpty()) {
+                double water = waterInput->text().toDouble();
+                double cement = cementInput->text().toDouble();
+                if (cement > 0) {
+                    currentWCR = water / cement;
+                }
             }
         } else {
             currentWCR = comboBox->currentText().section(':', 1, 1).toDouble();
@@ -1397,9 +1501,136 @@ void MainWindow::onChangeWCRAction() {
         dialog.accept();
     });
 
-    // Запуск диалогового окна
     dialog.exec();
 
-    // Проверяем, какое значение выбрал пользователь
-    qDebug() << "Обране значення W/C:" << currentWCR;
+    qDebug() << "Введено води:" << waterInput->text().toDouble();
+    qDebug() << "Введено цементу:" << cementInput->text().toDouble();
+    qDebug() << "Обране W/C:" << currentWCR;
+    connect(waterInput, &QLineEdit::textChanged, [&](const QString &text) {
+        if (!text.isEmpty() && !cementInput->text().isEmpty()) {
+            QString waterStr = text;
+            QString cementStr = cementInput->text();
+
+            waterStr.replace(",", ".");
+            cementStr.replace(",", ".");
+
+            double water = waterStr.toDouble();
+            double cement = cementStr.toDouble();
+
+            if (cement > 0) {
+                currentWCR = water / cement;
+            }
+        }
+    });
+
+    connect(cementInput, &QLineEdit::textChanged, [&](const QString &text) {
+        if (!text.isEmpty() && !waterInput->text().isEmpty()) {
+            QString waterStr = waterInput->text();
+            QString cementStr = text;
+
+            waterStr.replace(",", ".");
+            cementStr.replace(",", ".");
+
+            double water = waterStr.toDouble();
+            double cement = cementStr.toDouble();
+
+            if (cement > 0) {
+                currentWCR = water / cement;
+            }
+        }
+    });
+
+}
+
+// Открытие окна настроек плотности
+void MainWindow::openDensitySettings() {
+    QDialog *densityDialog = new QDialog(this);
+    densityDialog->setWindowTitle("Налаштування щільності");
+
+    // Поля ввода плотности
+    QLineEdit *solutionDensityEdit = new QLineEdit(densityDialog);
+    QLineEdit *cementDensityEdit = new QLineEdit(densityDialog);
+    QLineEdit *waterDensityEdit = new QLineEdit(densityDialog);
+
+    solutionDensityEdit->setText(QString::number(rho_tr));  // rho_tr - переменная для плотности раствора
+    cementDensityEdit->setText(QString::number(rho_c));     // rho_c - переменная для плотности цемента
+    waterDensityEdit->setText(QString::number(rho_w));      // rho_w - переменная для плотности воды
+
+    // Кнопка сохранения
+    QPushButton *saveButton = new QPushButton("Зберегти", densityDialog);
+    connect(saveButton, &QPushButton::clicked, [this, solutionDensityEdit, cementDensityEdit, waterDensityEdit, &densityDialog](){
+        // Сохраняем введенные данные
+        rho_tr = solutionDensityEdit->text().toDouble();
+        rho_c = cementDensityEdit->text().toDouble();
+        rho_w = waterDensityEdit->text().toDouble();
+
+        // Сохраняем в файл
+        saveSettings();
+
+        // Закрываем диалог
+        densityDialog->accept();
+    });
+
+    // Вертикальный layout для диалога
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(new QLabel("Щільність розчину:"));
+    layout->addWidget(solutionDensityEdit);
+    layout->addWidget(new QLabel("Щільність цементу:"));
+    layout->addWidget(cementDensityEdit);
+    layout->addWidget(new QLabel("Щільність води:"));
+    layout->addWidget(waterDensityEdit);
+    layout->addWidget(saveButton);
+
+    densityDialog->setLayout(layout);
+    densityDialog->exec();
+}
+
+// Метод для сохранения настроек
+void MainWindow::saveSettings() {
+    QSettings settings("settings.ini", QSettings::IniFormat);
+    settings.setValue("Density/solution", rho_tr);
+    settings.setValue("Density/cement", rho_c);
+    settings.setValue("Density/water", rho_w);
+}
+
+// Устанавливаем коэффициент K2
+void MainWindow::setK2() {
+    bool ok;
+    double newK2 = QInputDialog::getDouble(this, "Введіть коеф. потерь цемента (K2)",
+                                           "K2:", k2, 0.01, 10.0, 2, &ok);
+    if (ok) {
+        k2 = newK2;  // Сохраняем новое значение коэффициента
+    }
+}
+
+// Устанавливаем коэффициент K3
+void MainWindow::setK3() {
+    bool ok;
+    double newK3 = QInputDialog::getDouble(this, "Введіть коеф. потерь води (K3)",
+                                           "K3:", k3, 0.01, 10.0, 2, &ok);
+    if (ok) {
+        k3 = newK3;  // Сохраняем новое значение коэффициента
+    }
+}
+
+void MainWindow::openK2Settings()
+{
+    bool ok;
+    double newK2 = QInputDialog::getDouble(this, tr("Введіть новий коефіцієнт K2"),
+                                           tr("K2:"), k2, 0.01, 10.0, 2, &ok);
+    if (ok) {
+        k2 = newK2;
+        QMessageBox::information(this, tr("Коефіцієнт K2 оновлено"), tr("Новий коефіцієнт K2: %1").arg(k2));
+    }
+}
+
+void MainWindow::openK3Settings()
+{
+    bool ok;
+    double newK3 = QInputDialog::getDouble(this, tr("Введіть новий коефіцієнт K3"),
+                                           tr("K3:"), k3, 0.01, 10.0, 2, &ok);
+    if (ok) {
+        k3 = newK3;
+        QMessageBox::information(this, tr("Коефіцієнт K3 оновлено"), tr("Новий коефіцієнт K3: %1").arg(k3));
+    }
 }

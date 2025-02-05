@@ -3,8 +3,14 @@
 
 #include <QMainWindow>
 #include <QWidget>
+#include <QDialog>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QLabel>
 #include <QTextEdit>
 #include <QTimer>
+#include <QSettings>
 #include "infowidget.h"
 
 QT_BEGIN_NAMESPACE
@@ -103,6 +109,15 @@ private slots:
 
     void onChangeWCRAction();
 
+    void openDensitySettings();  // Открытие окна настроек плотности
+
+    void setK2();
+
+    void setK3();
+
+    void openK2Settings();  // Слот для открытия настроек K2
+
+    void openK3Settings();  // Слот для открытия настроек K3
 protected:
     void enterEvent(QEnterEvent *event) override;
 
@@ -119,7 +134,21 @@ private:
     InfoWidget *infoWindow = nullptr;
     QMenu *SMenu;  // Меню настроек
     QAction *CWR;  // Действие для изменения соотношения вода-цемент
-    double currentWCR = 1.0;
+    QAction *setK2Action;
+    QAction *setK3Action;
+
+    double currentWCR = 0.6667; // Соотношение цемента с водой
+
+    // Переменные для хранения плотности
+    double rho_tr = 1000.0; // Плотность транспортной жидкости
+    double rho_c = 1400.0;  // Плотность цемента
+    double rho_w = 1000.0;  // Плотность воды
+    double k2 = 1.05;     // Коэффициент потерь цемента
+    double k3 = 1.05;     // Коэффициент потерь воды
+
+    // Методы для сохранения и загрузки настроек
+    void saveSettings();
+    void loadSettings();
 };
 
 #endif // MAINWINDOW_H

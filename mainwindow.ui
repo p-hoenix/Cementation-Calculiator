@@ -119,6 +119,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="text">
+         <string>30</string>
+        </property>
        </widget>
        <widget class="QLineEdit" name="wellDiameterLineEdit">
         <property name="geometry">
@@ -141,6 +144,9 @@
           <height>25</height>
          </size>
         </property>
+        <property name="text">
+         <string>0.530</string>
+        </property>
        </widget>
        <widget class="QLineEdit" name="columnDiameterLineEdit">
         <property name="geometry">
@@ -162,6 +168,9 @@
           <width>100</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="text">
+         <string>0.426</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="depthLineEdit">
@@ -194,6 +203,9 @@
         <property name="inputMethodHints">
          <set>Qt::InputMethodHint::ImhFormattedNumbersOnly</set>
         </property>
+        <property name="text">
+         <string>30</string>
+        </property>
        </widget>
        <widget class="QLineEdit" name="innerDiameterLineEdit">
         <property name="geometry">
@@ -215,6 +227,9 @@
           <width>100</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="text">
+         <string>0.414</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="cavernosityCoeffLineEdit">
@@ -272,6 +287,9 @@
           <width>100</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="text">
+         <string>0.006</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_38">

@@ -825,10 +825,16 @@ public:
         wellTypeComboBox->setItemText(2, QCoreApplication::translate("MainWindow", "3 \320\272\320\276\320\273\320\276\320\275\320\270", nullptr));
 
         label->setText(QCoreApplication::translate("MainWindow", "\320\242\320\270\320\277 \321\201\320\262\320\265\321\200\320\264\320\273\320\276\320\262\320\270\320\275\320\270", nullptr));
+        cementHeightLineEdit->setText(QCoreApplication::translate("MainWindow", "30", nullptr));
+        wellDiameterLineEdit->setText(QCoreApplication::translate("MainWindow", "0.530", nullptr));
+        columnDiameterLineEdit->setText(QCoreApplication::translate("MainWindow", "0.426", nullptr));
 #if QT_CONFIG(tooltip)
         depthLineEdit->setToolTip(QString());
 #endif // QT_CONFIG(tooltip)
+        depthLineEdit->setText(QCoreApplication::translate("MainWindow", "30", nullptr));
+        innerDiameterLineEdit->setText(QCoreApplication::translate("MainWindow", "0.414", nullptr));
         cavernosityCoeffLineEdit->setText(QCoreApplication::translate("MainWindow", "1.2", nullptr));
+        wallThicknessLineEdit->setText(QCoreApplication::translate("MainWindow", "0.006", nullptr));
         label_38->setText(QCoreApplication::translate("MainWindow", "\320\223\320\273\320\270\320\261\320\270\320\275\320\260 \321\201\320\277\321\203\321\201\320\272\321\203 ", nullptr));
         label_36->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\265\321\204\321\226\321\206\321\226\321\224\320\275\321\202 \320\272\320\260\320\262\320\265\321\200\320\275\320\276\320\267\320\275\320\276\321\201\321\202\321\226 ", nullptr));
         label_35->setText(QCoreApplication::translate("MainWindow", "\320\242\320\276\320\262\321\211\320\270\320\275\320\260 \321\201\321\202\321\226\320\275\320\272\320\270", nullptr));

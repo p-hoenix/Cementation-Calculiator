@@ -537,15 +537,12 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../infowidget.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
-		../../inputhelper.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QRegularExpression \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
 		release/moc_predefs.h \
 		../../../../Qt/6.7.2/mingw_64/bin/moc.exe
 	'C:\Qt\6.7.2\mingw_64\bin\moc.exe' $(DEFINES) --include C:/TEST_BURPAS/CementCalc/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/release/moc_predefs.h -IC:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IC:/TEST_BURPAS/CementCalc -IC:/Qt/6.7.2/mingw_64/include -IC:/Qt/6.7.2/mingw_64/include/QtWidgets -IC:/Qt/6.7.2/mingw_64/include/QtGui -IC:/Qt/6.7.2/mingw_64/include/QtCore -I. -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IC:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IC:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ../../mainwindow.h -o release/moc_mainwindow.cpp
@@ -977,15 +974,12 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../infowidget.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
-		../../inputhelper.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QRegularExpression \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QLocale \
@@ -1192,15 +1186,12 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QTimer \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qtimer.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../infowidget.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
-		../../inputhelper.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QString \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QRegularExpression \
-		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
 		ui_mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QLocale \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/QVariant \
@@ -1213,6 +1204,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyleoption.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractspinbox.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qvalidator.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtCore/qregularexpression.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qslider.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qabstractslider.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstyle.h \
@@ -1227,6 +1219,8 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLabel \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlabel.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/qpicture.h \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QLineEdit \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qlineedit.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
@@ -1240,12 +1234,13 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QTabWidget \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QInputDialog \
+		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qinputdialog.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/QDockWidget \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtWidgets/qdockwidget.h \
-		../../InfoWidget.h \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/QDoubleValidator \
 		../../../../../../Qt/6.7.2/mingw_64/include/QtGui/QIntValidator
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/mainwindow.o ../../mainwindow.cpp
